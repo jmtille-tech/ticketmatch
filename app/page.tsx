@@ -261,6 +261,12 @@ export default function Home() {
                   <div style={{ fontSize: 13, color: "#aaa", margin: "6px 0 14px" }}>{s.rating} · {s.reviews} avis</div>
                   <div style={{ fontSize: 13, color: "#555", lineHeight: 1.6, marginBottom: 14 }}>{s.desc}</div>
                   {s.bureau_france && <div style={{ fontSize: 12, color: "#22c55e", marginBottom: 4 }}>✔ Bureau en France</div>}
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13 }}>
+  <span style={{ color: "#888" }}>Support Europe</span>
+  <span style={{ fontWeight: 600, color: solution.support_europe ? "#22c55e" : "#ef4444" }}>
+    {solution.support_europe ? "✔ Oui" : "✗ Non"}
+  </span>
+</div>
                   {s.support_24h && <div style={{ fontSize: 12, color: "#22c55e", marginBottom: 4 }}>✔ Support 24h/24</div>}
                   {s.api_ouverte && <div style={{ fontSize: 12, color: "#22c55e", marginBottom: 4 }}>✔ API ouverte</div>}
                   {s.cashless && <div style={{ fontSize: 12, color: "#22c55e", marginBottom: 4 }}>✔ Cashless</div>}
