@@ -35,17 +35,18 @@ function Stars({ rating }: { rating: number }) {
 }
 
 function InfoRow({ label, value }: { label: string; value: any }) {
+  if (value === null || value === undefined || value === "") return null;
   const bool = isTrue(value);
-  const isBool = value === true || value === false || value === "TRUE" || value === "true" || value === "Oui" || value === "oui" || value === "Non" || value === "non" || value === "FALSE" || value === "false";
+  const isBool = ["TRUE", "true", "FALSE", "false", "Oui", "oui", "Non", "non"].includes(String(value)) || value === true || value === false;
   return (
-    <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, alignItems: "center" }}>
+    <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, alignItems: "center", paddingBottom: 10, borderBottom: "1px solid #f5f5f5" }}>
       <span style={{ color: "#888" }}>{label}</span>
       {isBool ? (
         <span style={{ fontWeight: 600, color: bool ? "#22c55e" : "#ef4444" }}>
           {bool ? "✔ Oui" : "✗ Non"}
         </span>
       ) : (
-        <span style={{ fontWeight: 600, textAlign: "right", maxWidth: 180 }}>{value || "—"}</span>
+        <span style={{ fontWeight: 600, textAlign: "right", maxWidth: 180 }}>{value}</span>
       )}
     </div>
   );
@@ -83,7 +84,7 @@ export default function SolutionPage() {
   );
 
   const tags = solution.tags ? solution.tags.split(",") : [];
-  const langues = solution.langues ? solution.langues.split(",") : [];
+  const langues = solution.langues_solution ? solution.langues_solution.split(",") : [];
 
   return (
     <div style={{ fontFamily: "'DM Sans', 'Segoe UI', sans-serif", background: "#fafaf8", minHeight: "100vh" }}>
@@ -109,12 +110,12 @@ export default function SolutionPage() {
         </button>
       </nav>
 
-      <div style={{ maxWidth: 900, margin: "0 auto", padding: "48px 40px" }}>
+      <div style={{ maxWidth: 960, margin: "0 auto", padding: "48px 40px" }}>
 
         {/* HEADER */}
         <div style={{
           background: "#fff", borderRadius: 20, padding: 40,
-          border: "1.5px solid #e8e8e8", marginBottom: 24,
+          border: "1.5px solid #e8e8e8", marginBottom: 32,
           boxShadow: "0 2px 16px rgba(0,0,0,0.05)",
         }}>
           <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 20 }}>
@@ -159,7 +160,7 @@ export default function SolutionPage() {
           </div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: 24 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 360px", gap: 24 }}>
 
           {/* LEFT */}
           <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
@@ -183,38 +184,32 @@ export default function SolutionPage() {
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
                 <Badge label="Paiement intégré" value={solution.paiement_integre} />
                 <Badge label="Caisse certifiée" value={solution.caisse_certifiee} />
-                <Badge label="Contrôle d'accès" value={solution.controle_acces} />
+                <Badge label="Bornes billetterie" value={solution.bornes_billet} />
                 <Badge label="Cashless" value={solution.cashless} />
-                <Badge label="Gestion F&B" value={solution.gestion_fb} />
-                <Badge label="Bornes de caisse" value={solution.bornes_caisse} />
+                <Badge label="Vente sur place" value={solution.vente_sur_place} />
+                <Badge label="Vente en ligne" value={solution.vente_en_ligne} />
                 <Badge label="Bornes F&B" value={solution.bornes_fb} />
+                <Badge label="Contrôle d'accès" value={solution.controle_acces} />
                 <Badge label="Tarification dynamique" value={solution.tarification_dynamique} />
                 <Badge label="Gestion des groupes" value={solution.gestion_groupes} />
                 <Badge label="CSE" value={solution.gestion_cse} />
                 <Badge label="CRM intégré" value={solution.crm_integre} />
                 <Badge label="API ouverte" value={solution.api_ouverte} />
                 <Badge label="Plan de salle" value={solution.plan_de_salle} />
-                <Badge label="Billetterie mobile" value={solution.billetterie_mobile} />
-                <Badge label="Vente en ligne" value={solution.vente_en_ligne} />
                 <Badge label="Multidevise" value={solution.multidevise} />
                 <Badge label="Pass Culture" value={solution.pass_culture} />
-                <Badge label="Chorus Pro" value={solution.chorus_pro} />
-                <Badge label="Revente marché" value={solution.revente_marche} />
-                <Badge label="RGPD conforme" value={solution.rgpd_conforme} />
+                <Badge label="Chorus Pro" value={solution.chorus_pro_integre} />
+                <Badge label="OTAs" value={solution.otas} />
               </div>
-            </div>
 
-            {/* Intégrations */}
-            {solution.integration_logiciels && (
-              <div style={{ background: "#fff", borderRadius: 16, padding: 32, border: "1.5px solid #e8e8e8" }}>
-                <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 20, fontWeight: 700, marginBottom: 16 }}>Intégrations</h2>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                  {solution.integration_logiciels.split(",").map((i: string) => (
-                    <span key={i} style={{ background: "#f0f0ff", color: "#4444aa", borderRadius: 6, fontSize: 12, padding: "4px 12px", fontWeight: 500 }}>{i.trim()}</span>
-                  ))}
+              {solution.langues_support && (
+                <div style={{ marginTop: 20, paddingTop: 16, borderTop: "1px solid #f0f0f0" }}>
+                  <span style={{ fontSize: 13, color: "#888", marginRight: 8 }}>Langues du support :</span>
+                  <span style={{ fontSize: 13, fontWeight: 600 }}>{solution.langues_support}</span>
                 </div>
-              </div>
-            )}
+              )}
+            
+            </div>
           </div>
 
           {/* RIGHT */}
@@ -223,27 +218,26 @@ export default function SolutionPage() {
             {/* Infos clés */}
             <div style={{ background: "#fff", borderRadius: 16, padding: 28, border: "1.5px solid #e8e8e8" }}>
               <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 18, fontWeight: 700, marginBottom: 18 }}>Infos clés</h2>
-              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                {solution.type_solution && <InfoRow label="Type" value={solution.type_solution} />}
+              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                <InfoRow label="Type de solution" value={solution.type_solution} />
                 <InfoRow label="Bureau en France" value={solution.bureau_france} />
                 <InfoRow label="Bureau en Europe" value={solution.bureau_europe} />
                 <InfoRow label="Support France" value={solution.support_france} />
                 <InfoRow label="Support Europe" value={solution.support_europe} />
                 <InfoRow label="Support 24h/24" value={solution.support_24h} />
-                <InfoRow label="Serveur France" value={solution.hebergement_france} />
                 <InfoRow label="Serveur Europe" value={solution.serveur_europe} />
+                <InfoRow label="RGPD conforme" value={solution.rgpd_conforme} />
                 <InfoRow label="Compte démo" value={solution.compte_demo} />
+                <InfoRow label="F&B natif" value={solution.solution_fb_native} />
+                <InfoRow label="F&B intégré" value={solution.solution_fb_integre} />
                 <InfoRow label="Modèle de prix" value={solution.modele_prix || "Sur devis"} />
+                <InfoRow label="Jauge minimum" value={solution.jauge_min} />
+                <InfoRow label="Jauge maximum" value={solution["jauge_max"]} />
+                <InfoRow label="Références" value={solution.references_verticales} />
                 {langues.length > 0 && (
-                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, paddingBottom: 10, borderBottom: "1px solid #f5f5f5" }}>
                     <span style={{ color: "#888" }}>Langues</span>
                     <span style={{ fontWeight: 600, textAlign: "right", maxWidth: 180 }}>{langues.join(", ")}</span>
-                  </div>
-                )}
-                {solution.references_verticales && (
-                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13 }}>
-                    <span style={{ color: "#888" }}>Références</span>
-                    <span style={{ fontWeight: 600, textAlign: "right", maxWidth: 180 }}>{solution.references_verticales}</span>
                   </div>
                 )}
               </div>
