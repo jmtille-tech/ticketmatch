@@ -233,7 +233,7 @@ export default function SolutionPage() {
                 <InfoRow label="F&B intégré" value={solution.solution_fb_integre} />
                 <InfoRow label="Modèle de prix" value={solution.modele_prix || "Sur devis"} />
                 <InfoRow label="Jauge minimum" value={solution.jauge_min} />
-                <InfoRow label="Jauge maximum" value={solution["jauge_au - dela"]} />
+                <InfoRow label="Jauge maximum" value={solution.jauge_max} />
                 <InfoRow label="Références" value={solution.references_verticales} />
                 {langues.length > 0 && (
                   <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, paddingBottom: 10, borderBottom: "1px solid #f5f5f5" }}>
