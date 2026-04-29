@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { supabase } from "../lib/supabase";
 
 const sectors = [
@@ -30,6 +31,7 @@ function Stars({ rating }: { rating: number }) {
 function SolutionCard({ sol, compare, onToggleCompare }: { sol: any; compare: number[]; onToggleCompare: (id: number) => void }) {
   const isInCompare = compare.includes(sol.id);
   const tags = sol.tags ? sol.tags.split(",") : [];
+  const router = useRouter();
   return (
     <div style={{
       background: "#fff",
@@ -66,9 +68,9 @@ function SolutionCard({ sol, compare, onToggleCompare }: { sol: any; compare: nu
           <span style={{ fontSize: 12, color: "#aaa" }}>{sol.rating} · {sol.reviews} avis</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 6, alignItems: "flex-end" }}>
-          <button style={{ background: "#F4601A", color: "#fff", border: "none", borderRadius: 8, padding: "8px 16px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
-            Voir la fiche →
-          </button>
+          <button onClick={() => router.push(`/solutions/${sol.id}`)} style={{ background: "#F4601A", color: "#fff", border: "none", borderRadius: 8, padding: "8px 16px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
+  Voir la fiche →
+</button>
           <button onClick={() => onToggleCompare(sol.id)} style={{
             background: isInCompare ? "#fff0eb" : "#f8f8f8",
             color: isInCompare ? "#F4601A" : "#888",
