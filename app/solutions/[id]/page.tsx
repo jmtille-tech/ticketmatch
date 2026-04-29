@@ -209,16 +209,7 @@ export default function SolutionPage() {
                 </div>
               )}
 
-              {solution.integration_logiciels && (
-                <div style={{ marginTop: 16 }}>
-                  <span style={{ fontSize: 13, color: "#888", display: "block", marginBottom: 8 }}>Intégrations :</span>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                    {solution.integration_logiciels.split(",").map((i: string) => (
-                      <span key={i} style={{ background: "#f0f0ff", color: "#4444aa", borderRadius: 6, fontSize: 11, padding: "3px 10px", fontWeight: 500 }}>{i.trim()}</span>
-                    ))}
-                  </div>
-                </div>
-              )}
+           
             </div>
           </div>
 
