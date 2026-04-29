@@ -215,33 +215,7 @@ export default function SolutionPage() {
           {/* RIGHT */}
           <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
 
-            {/* Infos clés */}
-            <div style={{ background: "#fff", borderRadius: 16, padding: 28, border: "1.5px solid #e8e8e8" }}>
-              <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 18, fontWeight: 700, marginBottom: 18 }}>Infos clés</h2>
-              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                <InfoRow label="Type de solution" value={solution.type_solution} />
-                <InfoRow label="Bureau en France" value={solution.bureau_france} />
-                <InfoRow label="Bureau en Europe" value={solution.bureau_europe} />
-                <InfoRow label="Support France" value={solution.support_france} />
-                <InfoRow label="Support Europe" value={solution.support_europe} />
-                <InfoRow label="Support 24h/24" value={solution.support_24h} />
-                <InfoRow label="Serveur Europe" value={solution.serveur_europe} />
-                <InfoRow label="RGPD conforme" value={solution.rgpd_conforme} />
-                <InfoRow label="Compte démo" value={solution.compte_demo} />
-                <InfoRow label="F&B natif" value={solution.solution_fb_native} />
-                <InfoRow label="F&B intégré" value={solution.solution_fb_integre} />
-                <InfoRow label="Modèle de prix" value={solution.modele_prix || "Sur devis"} />
-                <InfoRow label="Jauge minimum" value={solution.jauge_min} />
-                <InfoRow label="Jauge maximum" value={solution["jauge_max"]} />
-                <InfoRow label="Références" value={solution.references_verticales} />
-                {langues.length > 0 && (
-                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, paddingBottom: 10, borderBottom: "1px solid #f5f5f5" }}>
-                    <span style={{ color: "#888" }}>Langues</span>
-                    <span style={{ fontWeight: 600, textAlign: "right", maxWidth: 180 }}>{langues.join(", ")}</span>
-                  </div>
-                )}
-              </div>
-            </div>
+          
 
             {/* Contact */}
             <div style={{ background: "linear-gradient(135deg, #fff7f4, #fff)", borderRadius: 16, padding: 28, border: "1.5px solid #fdd9cc" }}>
