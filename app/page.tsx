@@ -12,6 +12,8 @@ const sectors = [
   { label: "Cinéma", emoji: "🎬", count: 7 },
 ];
 
+const allSectors = ["Tous les secteurs", ...sectors.map((s) => s.label)];
+
 function Stars({ rating }: { rating: number }) {
   return (
     <div style={{ display: "flex", gap: 2, alignItems: "center" }}>
@@ -19,7 +21,7 @@ function Stars({ rating }: { rating: number }) {
         <svg key={i} width="14" height="14" viewBox="0 0 24 24">
           <polygon
             points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
-            fill={rating >= i ? "#F4601A" : rating >= i - 0.5 ? "#F4601A" : "#e5e7eb"}
+            fill={rating >= i ? "#F4601A" : "#e5e7eb"}
             stroke="none"
           />
         </svg>
@@ -29,9 +31,9 @@ function Stars({ rating }: { rating: number }) {
 }
 
 function SolutionCard({ sol, compare, onToggleCompare }: { sol: any; compare: number[]; onToggleCompare: (id: number) => void }) {
+  const router = useRouter();
   const isInCompare = compare.includes(sol.id);
   const tags = sol.tags ? sol.tags.split(",") : [];
-  const router = useRouter();
   return (
     <div style={{
       background: "#fff",
@@ -59,7 +61,7 @@ function SolutionCard({ sol, compare, onToggleCompare }: { sol: any; compare: nu
       <div style={{ fontSize: 13, color: "#777", lineHeight: 1.6, marginBottom: 14, minHeight: 60 }}>{sol.desc}</div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 18 }}>
         {tags.map((t: string) => (
-          <span key={t} style={{ background: "#f4f4f4", color: "#555", borderRadius: 6, fontSize: 11, padding: "3px 9px", fontWeight: 500 }}>{t}</span>
+          <span key={t} style={{ background: "#f4f4f4", color: "#555", borderRadius: 6, fontSize: 11, padding: "3px 9px", fontWeight: 500 }}>{t.trim()}</span>
         ))}
       </div>
       <div style={{ borderTop: "1px solid #f0f0f0", paddingTop: 16, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -68,7 +70,7 @@ function SolutionCard({ sol, compare, onToggleCompare }: { sol: any; compare: nu
           <span style={{ fontSize: 12, color: "#aaa" }}>{sol.rating} · {sol.reviews} avis</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 6, alignItems: "flex-end" }}>
-          <button style={{ background: "#F4601A", color: "#fff", border: "none", borderRadius: 8, padding: "8px 16px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
+          <button onClick={() => router.push(`/solutions/${sol.id}`)} style={{ background: "#F4601A", color: "#fff", border: "none", borderRadius: 8, padding: "8px 16px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
             Voir la fiche →
           </button>
           <button onClick={() => onToggleCompare(sol.id)} style={{
@@ -89,6 +91,7 @@ export default function Home() {
   const [solutions, setSolutions] = useState<any[]>([]);
   const [search, setSearch] = useState("");
   const [activeSector, setActiveSector] = useState<string | null>(null);
+  const [selectedSector, setSelectedSector] = useState("Tous les secteurs");
   const [compare, setCompare] = useState<number[]>([]);
   const [showCompare, setShowCompare] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -167,6 +170,11 @@ export default function Home() {
           <span style={{ padding: "0 14px", color: "#bbb", fontSize: 18 }}>🔍</span>
           <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Nom d'un éditeur, fonctionnalité, secteur…"
             style={{ flex: 1, border: "none", fontSize: 14, padding: "16px 0", background: "transparent", color: "#111", outline: "none" }} />
+          <div style={{ width: 1, height: 28, background: "#e8e8e8" }} />
+          <select value={selectedSector} onChange={(e) => { setSelectedSector(e.target.value); setActiveSector(e.target.value === "Tous les secteurs" ? null : e.target.value); }}
+            style={{ border: "none", background: "transparent", padding: "0 16px", fontSize: 13, color: "#555", fontFamily: "inherit", cursor: "pointer", height: 52 }}>
+            {allSectors.map(s => <option key={s}>{s}</option>)}
+          </select>
           <button style={{ background: "#F4601A", color: "#fff", border: "none", padding: "0 24px", height: 52, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>
             Rechercher
           </button>
@@ -260,8 +268,8 @@ export default function Home() {
                   <Stars rating={s.rating} />
                   <div style={{ fontSize: 13, color: "#aaa", margin: "6px 0 14px" }}>{s.rating} · {s.reviews} avis</div>
                   <div style={{ fontSize: 13, color: "#555", lineHeight: 1.6, marginBottom: 14 }}>{s.desc}</div>
-                  {s.bureau_france && <div style={{ fontSize: 12, color: "#22c55e", marginBottom: 4 }}>✔ Bureau en France</div>}
-                 
+                </div>
+              ))}
             </div>
           </div>
         </div>
