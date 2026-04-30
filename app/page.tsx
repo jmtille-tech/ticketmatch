@@ -9,9 +9,9 @@ const sectors = [
   { label: "Festivals & Concerts", emoji: "🎪", count: 13 },
   { label: "Sport", emoji: "⚽", count: 10 },
   { label: "Parcs d'attractions", emoji: "🎡", count: 7 },
-  { label: "Loisirs indoors", emoji: "🎳", count: 5 },
+  { label: "Activités de loisirs indoors", emoji: "🎳", count: 5 },
   { label: "Parcs aquatiques", emoji: "🏊", count: 6 },
-  { label: "Loisirs outdoors", emoji: "🌲", count: 6 },
+  { label: "Activités de loisirs outdoors", emoji: "🌲", count: 6 },
   { label: "Zoos & Parcs animaliers", emoji: "🦁", count: 4 },
 ];
 
