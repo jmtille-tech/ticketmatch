@@ -266,7 +266,7 @@ s.secteur_principal?.toLowerCase().includes(activeSector.toLowerCase())
       )}
 
 
-)}      {/* COMPARE MODAL */}
+    {/* COMPARE MODAL */}
 {showCompare && (
   <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.5)", zIndex: 300, display: "flex", alignItems: "center", justifyContent: "center" }} onClick={() => setShowCompare(false)}>
     <div onClick={(e) => e.stopPropagation()} style={{ background: "#fff", borderRadius: 20, padding: 36, maxWidth: 900, width: "95%", maxHeight: "85vh", overflowY: "auto" }}>
