@@ -236,7 +236,6 @@ export default function SolutionPage() {
                 <InfoRow label="Jauge maximum" value={solution.jauge_max} />
       
 <InfoRow label="Secteurs secondaires" value={solution.secteurs_secondaires} />
-                <InfoRow label="Références" value={solution.references_verticales} />
                 {langues.length > 0 && (
                   <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, paddingBottom: 10, borderBottom: "1px solid #f5f5f5" }}>
                     <span style={{ color: "#888" }}>Langues</span>
