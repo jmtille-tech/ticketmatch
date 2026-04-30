@@ -97,6 +97,7 @@ export default function Home() {
   const [selectedSector, setSelectedSector] = useState("Tous les secteurs");
   const [compare, setCompare] = useState<number[]>([]);
   const [showCompare, setShowCompare] = useState(false);
+  const [sectorCounts, setSectorCounts] = useState<{[key: string]: number}>({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -104,6 +105,13 @@ export default function Home() {
      const { data, error } = await supabase.from("solutions").select("*").limit(100);
       if (error) { console.error(error); }
       else { setSolutions(data); }
+      const counts: {[key: string]: number} = {};
+sectors.forEach(sector => {
+  counts[sector.label] = data.filter((s: any) => 
+    s.secteurs_secondaires?.toLowerCase().includes(sector.label.toLowerCase())
+  ).length;
+});
+setSectorCounts(counts);
       setLoading(false);
     };
     fetchSolutions();
@@ -204,7 +212,7 @@ export default function Home() {
               style={{ background: activeSector === s.label ? "#fff7f4" : "#fff", border: activeSector === s.label ? "2px solid #F4601A" : "1.5px solid #e8e8e8", borderRadius: 12, padding: "18px 12px", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, cursor: "pointer", transition: "all 0.2s" }}>
               <span style={{ fontSize: 28 }}>{s.emoji}</span>
               <span style={{ fontSize: 12, fontWeight: 600, textAlign: "center", color: "#222" }}>{s.label}</span>
-              <span style={{ fontSize: 11, color: "#aaa" }}>{s.count} solutions</span>
+              <span style={{ fontSize: 11, color: "#aaa" }}>{sectorCounts[s.label] || 0} solutions</span>
             </div>
           ))}
         </div>
