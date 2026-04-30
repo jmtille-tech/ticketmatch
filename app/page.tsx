@@ -33,6 +33,8 @@ function Stars({ rating }: { rating: number }) {
   );
 }
 
+const isTrue = (val: any) => val === true || val === "TRUE" || val === "true" || val === "Oui" || val === "oui";
+
 function SolutionCard({ sol, compare, onToggleCompare }: { sol: any; compare: number[]; onToggleCompare: (id: number) => void }) {
   const router = useRouter();
   const isInCompare = compare.includes(sol.id);
@@ -96,22 +98,26 @@ export default function Home() {
   const [activeSector, setActiveSector] = useState<string | null>(null);
   const [selectedSector, setSelectedSector] = useState("Tous les secteurs");
   const [compare, setCompare] = useState<number[]>([]);
+  const [showCompare, setShowCompare] = useState(false);
   const [compareTab, setCompareTab] = useState("infos");
-  const [sectorCounts, setSectorCounts] = useState<{[key: string]: number}>({});
   const [loading, setLoading] = useState(true);
+  const [sectorCounts, setSectorCounts] = useState<{[key: string]: number}>({});
 
   useEffect(() => {
     const fetchSolutions = async () => {
-     const { data, error } = await supabase.from("solutions").select("*").limit(100);
+      const { data, error } = await supabase.from("solutions").select("*").limit(100);
       if (error) { console.error(error); }
-      else { setSolutions(data); }
-      const counts: {[key: string]: number} = {};
-sectors.forEach(sector => {
-  counts[sector.label] = (data || []).filter((s: any) => 
-    s.secteurs_secondaires?.toLowerCase().includes(sector.label.toLowerCase())
-  ).length;
-});
-setSectorCounts(counts);
+      else {
+        setSolutions(data);
+        const counts: {[key: string]: number} = {};
+        sectors.forEach(sector => {
+          counts[sector.label] = (data || []).filter((s: any) =>
+            s.secteurs_secondaires?.toLowerCase().includes(sector.label.toLowerCase()) ||
+            s.secteur_principal?.toLowerCase().includes(sector.label.toLowerCase())
+          ).length;
+        });
+        setSectorCounts(counts);
+      }
       setLoading(false);
     };
     fetchSolutions();
@@ -122,8 +128,9 @@ setSectorCounts(counts);
       s.name?.toLowerCase().includes(search.toLowerCase()) ||
       s.desc?.toLowerCase().includes(search.toLowerCase()) ||
       s.tags?.toLowerCase().includes(search.toLowerCase());
-    const matchSector = !activeSector || s.secteurs_secondaires?.toLowerCase().includes(activeSector.toLowerCase()) ||
-s.secteur_principal?.toLowerCase().includes(activeSector.toLowerCase())
+    const matchSector = !activeSector ||
+      s.secteurs_secondaires?.toLowerCase().includes(activeSector.toLowerCase()) ||
+      s.secteur_principal?.toLowerCase().includes(activeSector.toLowerCase());
     return matchSearch && matchSector;
   });
 
@@ -192,7 +199,7 @@ s.secteur_principal?.toLowerCase().includes(activeSector.toLowerCase())
           </button>
         </div>
         <div style={{ display: "flex", gap: 40, marginTop: 40 }}>
-          {[{ n: solutions.length.toString(), label: "Éditeurs référencés" }, { n: "6", label: "Secteurs couverts" }, { n: "312", label: "Avis vérifiés" }, { n: "Gratuit", label: "Pour les exploitants" }].map((s) => (
+          {[{ n: solutions.length.toString(), label: "Éditeurs référencés" }, { n: "9", label: "Secteurs couverts" }, { n: "312", label: "Avis vérifiés" }, { n: "Gratuit", label: "Pour les exploitants" }].map((s) => (
             <div key={s.label}>
               <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 28, fontWeight: 700 }}>{s.n}</div>
               <div style={{ fontSize: 11, color: "#aaa", textTransform: "uppercase", letterSpacing: "0.08em", marginTop: 2 }}>{s.label}</div>
@@ -207,7 +214,7 @@ s.secteur_principal?.toLowerCase().includes(activeSector.toLowerCase())
           <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 26, fontWeight: 700 }}>Parcourir par secteur</h2>
           <span style={{ color: "#F4601A", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>Voir tous les secteurs →</span>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 12 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12 }}>
           {sectors.map((s) => (
             <div key={s.label} className="sector-card" onClick={() => setActiveSector(activeSector === s.label ? null : s.label)}
               style={{ background: activeSector === s.label ? "#fff7f4" : "#fff", border: activeSector === s.label ? "2px solid #F4601A" : "1.5px solid #e8e8e8", borderRadius: 12, padding: "18px 12px", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, cursor: "pointer", transition: "all 0.2s" }}>
@@ -265,124 +272,101 @@ s.secteur_principal?.toLowerCase().includes(activeSector.toLowerCase())
         </div>
       )}
 
-
-    {/* COMPARE MODAL */}
-{showCompare && (
-  <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.5)", zIndex: 300, display: "flex", alignItems: "center", justifyContent: "center" }} onClick={() => setShowCompare(false)}>
-    <div onClick={(e) => e.stopPropagation()} style={{ background: "#fff", borderRadius: 20, padding: 36, maxWidth: 900, width: "95%", maxHeight: "85vh", overflowY: "auto" }}>
-      
-      {/* Header */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
-        <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 24 }}>Comparaison</h2>
-        <button onClick={() => setShowCompare(false)} style={{ background: "none", border: "none", fontSize: 24, cursor: "pointer", color: "#888" }}>×</button>
-      </div>
-
-      {/* Onglets */}
-      <div style={{ display: "flex", gap: 8, marginBottom: 28 }}>
-        <button onClick={() => setCompareTab("infos")} style={{ padding: "8px 20px", borderRadius: 8, border: "none", cursor: "pointer", fontWeight: 600, fontSize: 13, background: compareTab === "infos" ? "#F4601A" : "#f4f4f4", color: compareTab === "infos" ? "#fff" : "#555" }}>
-          Infos clés
-        </button>
-        <button onClick={() => setCompareTab("fonctions")} style={{ padding: "8px 20px", borderRadius: 8, border: "none", cursor: "pointer", fontWeight: 600, fontSize: 13, background: compareTab === "fonctions" ? "#F4601A" : "#f4f4f4", color: compareTab === "fonctions" ? "#fff" : "#555" }}>
-          Fonctionnalités
-        </button>
-      </div>
-
-      {/* Noms des solutions */}
-      <div style={{ display: "grid", gridTemplateColumns: `200px repeat(${compareSolutions.length}, 1fr)`, gap: 0, marginBottom: 8 }}>
-        <div />
-        {compareSolutions.map((s) => (
-          <div key={s.id} style={{ textAlign: "center", padding: "12px 8px", background: "#fff7f4", borderRadius: 8, margin: "0 4px", fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 700, fontSize: 16 }}>
-            {s.name}
-            <div style={{ fontSize: 12, color: "#aaa", fontFamily: "DM Sans, sans-serif", fontWeight: 400, marginTop: 4 }}>
-              ⭐ {s.rating} · {s.reviews} avis
+      {/* COMPARE MODAL */}
+      {showCompare && (
+        <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.5)", zIndex: 300, display: "flex", alignItems: "center", justifyContent: "center" }} onClick={() => setShowCompare(false)}>
+          <div onClick={(e) => e.stopPropagation()} style={{ background: "#fff", borderRadius: 20, padding: 36, maxWidth: 900, width: "95%", maxHeight: "85vh", overflowY: "auto" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
+              <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 24 }}>Comparaison</h2>
+              <button onClick={() => setShowCompare(false)} style={{ background: "none", border: "none", fontSize: 24, cursor: "pointer", color: "#888" }}>×</button>
             </div>
+            <div style={{ display: "flex", gap: 8, marginBottom: 28 }}>
+              <button onClick={() => setCompareTab("infos")} style={{ padding: "8px 20px", borderRadius: 8, border: "none", cursor: "pointer", fontWeight: 600, fontSize: 13, background: compareTab === "infos" ? "#F4601A" : "#f4f4f4", color: compareTab === "infos" ? "#fff" : "#555" }}>Infos clés</button>
+              <button onClick={() => setCompareTab("fonctions")} style={{ padding: "8px 20px", borderRadius: 8, border: "none", cursor: "pointer", fontWeight: 600, fontSize: 13, background: compareTab === "fonctions" ? "#F4601A" : "#f4f4f4", color: compareTab === "fonctions" ? "#fff" : "#555" }}>Fonctionnalités</button>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: `200px repeat(${compareSolutions.length}, 1fr)`, gap: 0, marginBottom: 8 }}>
+              <div />
+              {compareSolutions.map((s) => (
+                <div key={s.id} style={{ textAlign: "center", padding: "12px 8px", background: "#fff7f4", borderRadius: 8, margin: "0 4px", fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 700, fontSize: 16 }}>
+                  {s.name}
+                  <div style={{ fontSize: 12, color: "#aaa", fontFamily: "DM Sans, sans-serif", fontWeight: 400, marginTop: 4 }}>⭐ {s.rating} · {s.reviews} avis</div>
+                </div>
+              ))}
+            </div>
+            {compareTab === "infos" && (
+              <div>
+                {[
+                  { label: "Type de solution", key: "type_solution" },
+                  { label: "Bureau en France", key: "bureau_france" },
+                  { label: "Bureau en Europe", key: "bureau_europe" },
+                  { label: "Support France", key: "support_france" },
+                  { label: "Support Europe", key: "support_europe" },
+                  { label: "Support 24h/24", key: "support_24h" },
+                  { label: "Serveur Europe", key: "serveur_europe" },
+                  { label: "RGPD conforme", key: "rgpd_conforme" },
+                  { label: "Compte démo", key: "compte_demo" },
+                  { label: "F&B natif", key: "solution_fb_native" },
+                  { label: "F&B intégré", key: "solution_fb_integre" },
+                  { label: "Modèle de prix", key: "modele_prix" },
+                  { label: "Secteur principal", key: "secteur_principal" },
+                ].map((row, i) => (
+                  <div key={row.key} style={{ display: "grid", gridTemplateColumns: `200px repeat(${compareSolutions.length}, 1fr)`, background: i % 2 === 0 ? "#fafaf8" : "#fff", borderRadius: 6, padding: "10px 0" }}>
+                    <div style={{ fontSize: 13, color: "#888", padding: "0 12px", display: "flex", alignItems: "center" }}>{row.label}</div>
+                    {compareSolutions.map((s) => {
+                      const val = s[row.key];
+                      const isBool = ["TRUE", "true", "FALSE", "false", "Oui", "oui", "Non", "non"].includes(String(val)) || val === true || val === false;
+                      const bool = isTrue(val);
+                      return (
+                        <div key={s.id} style={{ textAlign: "center", fontSize: 13, fontWeight: 600, padding: "0 8px" }}>
+                          {isBool ? <span style={{ color: bool ? "#22c55e" : "#ef4444" }}>{bool ? "✔" : "✗"}</span> : <span>{val || "—"}</span>}
+                        </div>
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
+            )}
+            {compareTab === "fonctions" && (
+              <div>
+                {[
+                  { label: "Paiement intégré", key: "paiement_integre" },
+                  { label: "Caisse certifiée", key: "caisse_certifiee" },
+                  { label: "Bornes billetterie", key: "bornes_billet" },
+                  { label: "Cashless", key: "cashless" },
+                  { label: "Vente sur place", key: "vente_sur_place" },
+                  { label: "Vente en ligne", key: "vente_en_ligne" },
+                  { label: "Bornes F&B", key: "bornes_fb" },
+                  { label: "Contrôle d'accès", key: "controle_acces" },
+                  { label: "Tarification dynamique", key: "tarification_dynamique" },
+                  { label: "Gestion des groupes", key: "gestion_groupes" },
+                  { label: "CSE", key: "gestion_cse" },
+                  { label: "CRM intégré", key: "crm_integre" },
+                  { label: "API ouverte", key: "api_ouverte" },
+                  { label: "Plan de salle", key: "plan_de_salle" },
+                  { label: "Multidevise", key: "multidevise" },
+                  { label: "Pass Culture", key: "pass_culture" },
+                  { label: "Chorus Pro", key: "chorus_pro_integre" },
+                  { label: "OTAs", key: "otas" },
+                ].map((row, i) => (
+                  <div key={row.key} style={{ display: "grid", gridTemplateColumns: `200px repeat(${compareSolutions.length}, 1fr)`, background: i % 2 === 0 ? "#fafaf8" : "#fff", borderRadius: 6, padding: "10px 0" }}>
+                    <div style={{ fontSize: 13, color: "#888", padding: "0 12px", display: "flex", alignItems: "center" }}>{row.label}</div>
+                    {compareSolutions.map((s) => {
+                      const bool = isTrue(s[row.key]);
+                      return (
+                        <div key={s.id} style={{ textAlign: "center", fontSize: 14, fontWeight: 700 }}>
+                          <span style={{ color: bool ? "#22c55e" : "#ef4444" }}>{bool ? "✔" : "✗"}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        ))}
-      </div>
-
-      {/* Contenu Infos clés */}
-      {compareTab === "infos" && (
-        <div>
-          {[
-            { label: "Type de solution", key: "type_solution" },
-            { label: "Bureau en France", key: "bureau_france" },
-            { label: "Bureau en Europe", key: "bureau_europe" },
-            { label: "Support France", key: "support_france" },
-            { label: "Support Europe", key: "support_europe" },
-            { label: "Support 24h/24", key: "support_24h" },
-            { label: "Serveur Europe", key: "serveur_europe" },
-            { label: "RGPD conforme", key: "rgpd_conforme" },
-            { label: "Compte démo", key: "compte_demo" },
-            { label: "F&B natif", key: "solution_fb_native" },
-            { label: "F&B intégré", key: "solution_fb_integre" },
-            { label: "Modèle de prix", key: "modele_prix" },
-            { label: "Secteur principal", key: "secteur_principal" },
-          ].map((row, i) => (
-            <div key={row.key} style={{ display: "grid", gridTemplateColumns: `200px repeat(${compareSolutions.length}, 1fr)`, gap: 0, background: i % 2 === 0 ? "#fafaf8" : "#fff", borderRadius: 6, padding: "10px 0" }}>
-              <div style={{ fontSize: 13, color: "#888", padding: "0 12px", display: "flex", alignItems: "center" }}>{row.label}</div>
-              {compareSolutions.map((s) => {
-                const val = s[row.key];
-                const isBool = ["TRUE", "true", "FALSE", "false", "Oui", "oui", "Non", "non"].includes(String(val)) || val === true || val === false;
-                const bool = val === true || val === "TRUE" || val === "true" || val === "Oui" || val === "oui";
-                return (
-                  <div key={s.id} style={{ textAlign: "center", fontSize: 13, fontWeight: 600, padding: "0 8px" }}>
-                    {isBool ? (
-                      <span style={{ color: bool ? "#22c55e" : "#ef4444" }}>{bool ? "✔" : "✗"}</span>
-                    ) : (
-                      <span>{val || "—"}</span>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          ))}
         </div>
       )}
 
-      {/* Contenu Fonctionnalités */}
-      {compareTab === "fonctions" && (
-        <div>
-          {[
-            { label: "Paiement intégré", key: "paiement_integre" },
-            { label: "Caisse certifiée", key: "caisse_certifiee" },
-            { label: "Bornes billetterie", key: "bornes_billet" },
-            { label: "Cashless", key: "cashless" },
-            { label: "Vente sur place", key: "vente_sur_place" },
-            { label: "Vente en ligne", key: "vente_en_ligne" },
-            { label: "Bornes F&B", key: "bornes_fb" },
-            { label: "Contrôle d'accès", key: "controle_acces" },
-            { label: "Tarification dynamique", key: "tarification_dynamique" },
-            { label: "Gestion des groupes", key: "gestion_groupes" },
-            { label: "CSE", key: "gestion_cse" },
-            { label: "CRM intégré", key: "crm_integre" },
-            { label: "API ouverte", key: "api_ouverte" },
-            { label: "Plan de salle", key: "plan_de_salle" },
-            { label: "Multidevise", key: "multidevise" },
-            { label: "Pass Culture", key: "pass_culture" },
-            { label: "Chorus Pro", key: "chorus_pro_integre" },
-            { label: "OTAs", key: "otas" },
-          ].map((row, i) => (
-            <div key={row.key} style={{ display: "grid", gridTemplateColumns: `200px repeat(${compareSolutions.length}, 1fr)`, gap: 0, background: i % 2 === 0 ? "#fafaf8" : "#fff", borderRadius: 6, padding: "10px 0" }}>
-              <div style={{ fontSize: 13, color: "#888", padding: "0 12px", display: "flex", alignItems: "center" }}>{row.label}</div>
-              {compareSolutions.map((s) => {
-                const val = s[row.key];
-                const bool = val === true || val === "TRUE" || val === "true" || val === "Oui" || val === "oui";
-                return (
-                  <div key={s.id} style={{ textAlign: "center", fontSize: 14, fontWeight: 700 }}>
-                    <span style={{ color: bool ? "#22c55e" : "#ef4444" }}>{bool ? "✔" : "✗"}</span>
-                  </div>
-                );
-              })}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  </div>
-  )}
-
-       {/* FOOTER */}
-
+      {/* FOOTER */}
       <footer style={{ borderTop: "1px solid #ebebeb", background: "#fff", padding: "32px 40px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div>
           <span style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 18, fontWeight: 700 }}>Ticket<span style={{ color: "#F4601A" }}>Match</span></span>
