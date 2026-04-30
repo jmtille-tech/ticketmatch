@@ -265,8 +265,8 @@ s.secteur_principal?.toLowerCase().includes(activeSector.toLowerCase())
         </div>
       )}
 
-      {/* COMPARE MODAL */}
-      {/* COMPARE MODAL */}
+
+)}      {/* COMPARE MODAL */}
 {showCompare && (
   <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.5)", zIndex: 300, display: "flex", alignItems: "center", justifyContent: "center" }} onClick={() => setShowCompare(false)}>
     <div onClick={(e) => e.stopPropagation()} style={{ background: "#fff", borderRadius: 20, padding: 36, maxWidth: 900, width: "95%", maxHeight: "85vh", overflowY: "auto" }}>
@@ -379,8 +379,10 @@ s.secteur_principal?.toLowerCase().includes(activeSector.toLowerCase())
       )}
     </div>
   </div>
-)}
-      {/* FOOTER */}
+  )}
+
+       {/* FOOTER */}
+
       <footer style={{ borderTop: "1px solid #ebebeb", background: "#fff", padding: "32px 40px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div>
           <span style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 18, fontWeight: 700 }}>Ticket<span style={{ color: "#F4601A" }}>Match</span></span>
