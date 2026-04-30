@@ -3,32 +3,24 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "../lib/supabase";
 
-const sectors = [
+ = [
   { label: "Spectacle vivant", emoji: "🎭", count: 18 },
   { label: "Parcs & loisirs", emoji: "🎡", count: 11 },
   { label: "Sport", emoji: "⚽", count: 9 },
   { label: "Musées & culture", emoji: "🏛️", count: 14 },
   { label: "Festivals", emoji: "🎪", count: 16 },
   { label: "Cinéma", emoji: "🎬", count: 7 },
+]const sectors = [
+  { label: "Spectacle vivant", emoji: "🎭", count: 16 },
+  { label: "Musées & culture", emoji: "🏛️", count: 14 },
+  { label: "Festivals & Concerts", emoji: "🎪", count: 13 },
+  { label: "Sport", emoji: "⚽", count: 10 },
+  { label: "Parcs d'attractions", emoji: "🎡", count: 7 },
+  { label: "Loisirs indoors", emoji: "🎳", count: 5 },
+  { label: "Parcs aquatiques", emoji: "🏊", count: 6 },
+  { label: "Loisirs outdoors", emoji: "🌲", count: 6 },
+  { label: "Zoos & Parcs animaliers", emoji: "🦁", count: 4 },
 ];
-
-const allSectors = ["Tous les secteurs", ...sectors.map((s) => s.label)];
-
-function Stars({ rating }: { rating: number }) {
-  return (
-    <div style={{ display: "flex", gap: 2, alignItems: "center" }}>
-      {[1, 2, 3, 4, 5].map((i) => (
-        <svg key={i} width="14" height="14" viewBox="0 0 24 24">
-          <polygon
-            points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
-            fill={rating >= i ? "#F4601A" : "#e5e7eb"}
-            stroke="none"
-          />
-        </svg>
-      ))}
-    </div>
-  );
-}
 
 function SolutionCard({ sol, compare, onToggleCompare }: { sol: any; compare: number[]; onToggleCompare: (id: number) => void }) {
   const router = useRouter();
