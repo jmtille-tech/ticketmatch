@@ -101,7 +101,7 @@ export default function Home() {
 
   useEffect(() => {
     const fetchSolutions = async () => {
-      const { data, error } = await supabase.from("solutions").select("*");
+     const { data, error } = await supabase.from("solutions").select("*").limit(100);
       if (error) { console.error(error); }
       else { setSolutions(data); }
       setLoading(false);
@@ -114,7 +114,7 @@ export default function Home() {
       s.name?.toLowerCase().includes(search.toLowerCase()) ||
       s.desc?.toLowerCase().includes(search.toLowerCase()) ||
       s.tags?.toLowerCase().includes(search.toLowerCase());
-    const matchSector = !activeSector || s.secteur_principal?.includes(activeSector);
+    const matchSector = !activeSector || s.secteurs_secondaires?.toLowerCase().includes(activeSector.toLowerCase())
     return matchSearch && matchSector;
   });
 
