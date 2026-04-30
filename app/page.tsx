@@ -15,6 +15,8 @@ const sectors = [
   { label: "Zoos & Parcs animaliers", emoji: "🦁", count: 4 },
 ];
 
+const allSectors = ["Tous les secteurs", ...sectors.map((s) => s.label)];
+
 function SolutionCard({ sol, compare, onToggleCompare }: { sol: any; compare: number[]; onToggleCompare: (id: number) => void }) {
   const router = useRouter();
   const isInCompare = compare.includes(sol.id);
