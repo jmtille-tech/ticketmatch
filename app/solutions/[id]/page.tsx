@@ -234,6 +234,8 @@ export default function SolutionPage() {
                 <InfoRow label="Modèle de prix" value={solution.modele_prix || "Sur devis"} />
                 <InfoRow label="Jauge minimum" value={solution.jauge_min} />
                 <InfoRow label="Jauge maximum" value={solution.jauge_max} />
+                <InfoRow label="Secteur principal" value={solution.secteur_principal} />
+<InfoRow label="Secteurs secondaires" value={solution.secteurs_secondaires} />
                 <InfoRow label="Références" value={solution.references_verticales} />
                 {langues.length > 0 && (
                   <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, paddingBottom: 10, borderBottom: "1px solid #f5f5f5" }}>
