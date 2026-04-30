@@ -167,9 +167,9 @@ export default function Home() {
           {["Éditeurs", "Comparateur", "Avis", "Ressources"].map((l) => (
             <span key={l} style={{ color: "#555", fontSize: 13, fontWeight: 500, letterSpacing: "0.04em", textTransform: "uppercase", cursor: "pointer" }}>{l}</span>
           ))}
-          <button style={{ background: "#F4601A", color: "#fff", border: "none", borderRadius: 8, padding: "8px 18px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
-            Référencer ma solution
-          </button>
+          <a href="https://tally.so/r/LZ5Zj2" target="_blank" style={{ background: "#F4601A", color: "#fff", border: "none", borderRadius: 8, padding: "8px 18px", fontSize: 12, fontWeight: 700, cursor: "pointer", textDecoration: "none" }}>
+  Référencer ma solution
+</a>
         </div>
       </nav>
 
