@@ -142,7 +142,7 @@ export default function SolutionPage() {
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                   <Stars rating={solution.rating || 0} />
-                  <span style={{ fontSize: 14, color: "#777" }}>{solution.rating} · {solution.reviews} avis</span>
+                  <span style={{ fontSize: 14, color: "#777" }}>{solution.rating} · {solution.reviews} avis · <a href="https://www.getapp.fr" target="_blank" style={{ color: "#aaa", fontSize: 11 }}>Source : GetApp</a></span>
                 </div>
               </div>
             </div>
