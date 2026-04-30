@@ -153,7 +153,7 @@ export default function SolutionPage() {
                   Visiter le site →
                 </a>
               )}
-              <a href="https://tally.so/r/xX9Xyd" target="_blank" style={{ width: "100%", background: "#F4601A", color: "#fff", border: "none", borderRadius: 10, padding: "12px", fontSize: 14, fontWeight: 700, cursor: "pointer", marginBottom: 10, textAlign: "center", textDecoration: "none", display: "block" }}>
+              <a href={`https://tally.so/r/xX9Xyd?solution=${encodeURIComponent(solution.name)}`} target="_blank" style={{ width: "100%", background: "#F4601A", color: "#fff", border: "none", borderRadius: 10, padding: "12px", fontSize: 14, fontWeight: 700, cursor: "pointer", marginBottom: 10, textAlign: "center", textDecoration: "none", display: "block" }}>
   Laisser un avis
 </a>
             </div>
