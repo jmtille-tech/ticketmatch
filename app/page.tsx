@@ -114,7 +114,7 @@ export default function Home() {
       s.name?.toLowerCase().includes(search.toLowerCase()) ||
       s.desc?.toLowerCase().includes(search.toLowerCase()) ||
       s.tags?.toLowerCase().includes(search.toLowerCase());
-    const matchSector = !activeSector || s.sectors?.includes(activeSector);
+    const matchSector = !activeSector || s.secteur_principal?.includes(activeSector);
     return matchSearch && matchSector;
   });
 
