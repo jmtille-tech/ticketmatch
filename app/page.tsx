@@ -3,13 +3,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "../lib/supabase";
 
-const sectors = [
-  { label: "Spectacle vivant", emoji: "🎭", count: 18 },
-  { label: "Parcs & loisirs", emoji: "🎡", count: 11 },
-  { label: "Sport", emoji: "⚽", count: 9 },
-  { label: "Musées & culture", emoji: "🏛️", count: 14 },
-  { label: "Festivals", emoji: "🎪", count: 16 },
-  { label: "Cinéma", emoji: "🎬", count: 7 },
 ]const sectors = [
   { label: "Spectacle vivant", emoji: "🎭", count: 16 },
   { label: "Musées & culture", emoji: "🏛️", count: 14 },
