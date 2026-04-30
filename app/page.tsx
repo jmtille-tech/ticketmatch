@@ -122,7 +122,8 @@ setSectorCounts(counts);
       s.name?.toLowerCase().includes(search.toLowerCase()) ||
       s.desc?.toLowerCase().includes(search.toLowerCase()) ||
       s.tags?.toLowerCase().includes(search.toLowerCase());
-    const matchSector = !activeSector || s.secteurs_secondaires?.toLowerCase().includes(activeSector.toLowerCase())
+    const matchSector = !activeSector || s.secteurs_secondaires?.toLowerCase().includes(activeSector.toLowerCase()) ||
+s.secteur_principal?.toLowerCase().includes(activeSector.toLowerCase())
     return matchSearch && matchSector;
   });
 
