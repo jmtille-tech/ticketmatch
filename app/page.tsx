@@ -107,7 +107,7 @@ export default function Home() {
       else { setSolutions(data); }
       const counts: {[key: string]: number} = {};
 sectors.forEach(sector => {
-  counts[sector.label] = data.filter((s: any) => 
+  counts[sector.label] = (data || []).filter((s: any) => 
     s.secteurs_secondaires?.toLowerCase().includes(sector.label.toLowerCase())
   ).length;
 });
