@@ -153,9 +153,9 @@ export default function SolutionPage() {
                   Visiter le site →
                 </a>
               )}
-              <button style={{ background: "#fff", color: "#F4601A", border: "2px solid #F4601A", borderRadius: 10, padding: "10px 24px", fontSize: 14, fontWeight: 700, cursor: "pointer" }}>
-                Demander une démo
-              </button>
+              <a href="https://tally.so/r/xX9Xyd" target="_blank" style={{ width: "100%", background: "#F4601A", color: "#fff", border: "none", borderRadius: 10, padding: "12px", fontSize: 14, fontWeight: 700, cursor: "pointer", marginBottom: 10, textAlign: "center", textDecoration: "none", display: "block" }}>
+  Laisser un avis
+</a>
             </div>
           </div>
         </div>
