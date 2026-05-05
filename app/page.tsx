@@ -153,25 +153,6 @@ export default function Home() {
         .compare-bar { animation: slideUp 0.3s ease; }
       `}</style>
 
-      {/* NAV */}
-      <nav style={{
-        background: "#fff", borderBottom: "1px solid #ebebeb",
-        position: "sticky", top: 0, zIndex: 100,
-        padding: "0 40px", height: 60,
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-      }}>
-        <span style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 22, fontWeight: 700 }}>
-          Ticket<span style={{ color: "#F4601A" }}>Match</span>
-        </span>
-        <div style={{ display: "flex", gap: 32, alignItems: "center" }}>
-          {["Éditeurs", "Comparateur", "Avis", "Ressources"].map((l) => (
-            <span key={l} style={{ color: "#555", fontSize: 13, fontWeight: 500, letterSpacing: "0.04em", textTransform: "uppercase", cursor: "pointer" }}>{l}</span>
-          ))}
-          <a href="https://tally.so/r/LZ5Zj2" target="_blank" style={{ background: "#F4601A", color: "#fff", border: "none", borderRadius: 8, padding: "8px 18px", fontSize: 12, fontWeight: 700, cursor: "pointer", textDecoration: "none" }}>
-  Référencer ma solution
-</a>
-        </div>
-      </nav>
 
       {/* HERO */}
       <section style={{ background: "linear-gradient(160deg, #fff 60%, #fff7f4 100%)", padding: "72px 40px 56px", maxWidth: 960, margin: "0 auto" }}>
