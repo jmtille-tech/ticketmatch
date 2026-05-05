@@ -348,17 +348,6 @@ export default function Home() {
       )}
 
       {/* FOOTER */}
-      <footer style={{ borderTop: "1px solid #ebebeb", background: "#fff", padding: "32px 40px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <div>
-          <span style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 18, fontWeight: 700 }}>Ticket<span style={{ color: "#F4601A" }}>Match</span></span>
-          <p style={{ fontSize: 12, color: "#aaa", marginTop: 4 }}>La référence des éditeurs de billetterie en France</p>
-        </div>
-        <div style={{ display: "flex", gap: 28 }}>
-          {["Mentions légales", "Contact", "Référencer ma solution", "Blog"].map((l) => (
-            <span key={l} style={{ fontSize: 13, color: "#777", cursor: "pointer" }}>{l}</span>
-          ))}
-        </div>
-      </footer>
     </div>
   );
 }
