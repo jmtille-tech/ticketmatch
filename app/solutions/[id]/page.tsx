@@ -131,14 +131,6 @@ export default function SolutionPage() {
                   <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 32, fontWeight: 700, color: "#111" }}>
                     {solution.name}
                   </h1>
-                  <span style={{
-                    fontSize: 11, fontWeight: 700, letterSpacing: "0.08em",
-                    color: solution.badge_type === "featured" ? "#F4601A" : "#22c55e",
-                    background: solution.badge_type === "featured" ? "#fff7f4" : "#f0fdf4",
-                    padding: "3px 10px", borderRadius: 6,
-                  }}>
-                    {solution.badge_type === "featured" ? "⭐ " : "✔ "}{solution.badge}
-                  </span>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                   <Stars rating={solution.rating || 0} />
@@ -148,14 +140,23 @@ export default function SolutionPage() {
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 10, alignItems: "flex-end" }}>
               {solution.site_web && (
-                <a href={solution.site_web} target="_blank" rel="noopener noreferrer"
-                  style={{ background: "#F4601A", color: "#fff", border: "none", borderRadius: 10, padding: "12px 24px", fontSize: 14, fontWeight: 700, cursor: "pointer", textDecoration: "none" }}>
+                <a
+                  href={solution.site_web}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ background: "#F4601A", color: "#fff", border: "none", borderRadius: 10, padding: "12px 24px", fontSize: 14, fontWeight: 700, cursor: "pointer", textDecoration: "none" }}
+                >
                   Visiter le site →
                 </a>
               )}
-              <a href={`https://tally.so/r/xX9Xyd?solution=${encodeURIComponent(solution.name)}`} target="_blank" style={{ width: "100%", background: "#F4601A", color: "#fff", border: "none", borderRadius: 10, padding: "12px", fontSize: 14, fontWeight: 700, cursor: "pointer", marginBottom: 10, textAlign: "center", textDecoration: "none", display: "block" }}>
-  Laisser un avis
-</a>
+              <a
+                href={`https://tally.so/r/xX9Xyd?solution=${encodeURIComponent(solution.name)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ background: "#fff", color: "#F4601A", border: "2px solid #F4601A", borderRadius: 10, padding: "12px 24px", fontSize: 14, fontWeight: 700, cursor: "pointer", textDecoration: "none" }}
+              >
+                Laisser un avis
+              </a>
             </div>
           </div>
         </div>
@@ -201,15 +202,12 @@ export default function SolutionPage() {
                 <Badge label="Chorus Pro" value={solution.chorus_pro_integre} />
                 <Badge label="OTAs" value={solution.otas} />
               </div>
-
               {solution.langues_support && (
                 <div style={{ marginTop: 20, paddingTop: 16, borderTop: "1px solid #f0f0f0" }}>
                   <span style={{ fontSize: 13, color: "#888", marginRight: 8 }}>Langues du support :</span>
                   <span style={{ fontSize: 13, fontWeight: 600 }}>{solution.langues_support}</span>
                 </div>
               )}
-
-           
             </div>
           </div>
 
@@ -225,7 +223,7 @@ export default function SolutionPage() {
                 <InfoRow label="Bureau en Europe" value={solution.bureau_europe} />
                 <InfoRow label="Support France" value={solution.support_france} />
                 <InfoRow label="Support Europe" value={solution.support_europe} />
-                <InfoRow label="Support 24h/24" value={solution.support_24h} />
+                <InfoRow label="Support 24h/24" value={solution["support_24/7"]} />
                 <InfoRow label="Serveur Europe" value={solution.serveur_europe} />
                 <InfoRow label="RGPD conforme" value={solution.rgpd_conforme} />
                 <InfoRow label="Compte démo" value={solution.compte_demo} />
@@ -234,8 +232,7 @@ export default function SolutionPage() {
                 <InfoRow label="Modèle de prix" value={solution.modele_prix || "Sur devis"} />
                 <InfoRow label="Jauge minimum" value={solution.jauge_min} />
                 <InfoRow label="Jauge maximum" value={solution.jauge_max} />
-      
-<InfoRow label="Secteurs secondaires" value={solution.secteurs_secondaires} />
+                <InfoRow label="Secteurs secondaires" value={solution.secteurs_secondaires} />
                 {langues.length > 0 && (
                   <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, paddingBottom: 10, borderBottom: "1px solid #f5f5f5" }}>
                     <span style={{ color: "#888" }}>Langues</span>
@@ -249,12 +246,21 @@ export default function SolutionPage() {
             <div style={{ background: "linear-gradient(135deg, #fff7f4, #fff)", borderRadius: 16, padding: 28, border: "1.5px solid #fdd9cc" }}>
               <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 18, fontWeight: 700, marginBottom: 10 }}>Intéressé ?</h2>
               <p style={{ fontSize: 13, color: "#777", lineHeight: 1.6, marginBottom: 16 }}>Demandez une démonstration gratuite ou plus d'informations.</p>
-              <button style={{ width: "100%", background: "#F4601A", color: "#fff", border: "none", borderRadius: 10, padding: "12px", fontSize: 14, fontWeight: 700, cursor: "pointer", marginBottom: 10 }}>
+              <a
+                href={`https://tally.so/r/0Qolz6?solution=${encodeURIComponent(solution.name)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: "block", width: "100%", background: "#F4601A", color: "#fff", borderRadius: 8, padding: "12px 0", fontSize: 14, fontWeight: 600, cursor: "pointer", textAlign: "center", textDecoration: "none", marginBottom: 10 }}
+              >
                 Demander une démo
-              </button>
+              </a>
               {solution.site_web && (
-                <a href={solution.site_web} target="_blank" rel="noopener noreferrer"
-                  style={{ display: "block", width: "100%", background: "#fff", color: "#F4601A", border: "2px solid #F4601A", borderRadius: 10, padding: "10px", fontSize: 14, fontWeight: 700, cursor: "pointer", textAlign: "center", textDecoration: "none" }}>
+                <a
+                  href={solution.site_web}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: "block", width: "100%", background: "#fff", color: "#F4601A", border: "2px solid #F4601A", borderRadius: 8, padding: "12px 0", fontSize: 14, fontWeight: 700, cursor: "pointer", textAlign: "center", textDecoration: "none" }}
+                >
                   Visiter le site
                 </a>
               )}
