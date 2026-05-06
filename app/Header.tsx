@@ -6,7 +6,9 @@ export default function Header() {
   return (
     <nav style={{ background: "#fff", borderBottom: "1px solid #ebebeb", padding: "0 40px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between", fontFamily: "'DM Sans', sans-serif" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-        <a href="https://neuroplayxperiences.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: "#aaa", textDecoration: "none", display: "flex", alignItems: "center", gap: 4 }}>
+        <a href="https://neuroplayxperiences.com" style={{ fontSize: 12, color: "#aaa", textDecoration: "none", display: "flex", alignItems: "center", gap: 4 }}>
+  ← Neuroplay Xpériences
+</a>
           ← Neuroplay Xpériences
         </a>
         <span onClick={() => router.push("/")} style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 22, fontWeight: 700, cursor: "pointer" }}>
