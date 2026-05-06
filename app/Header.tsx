@@ -8,9 +8,6 @@ export default function Header() {
     <nav style={{
       background: "#fff",
       borderBottom: "1px solid #ebebeb",
-      position: "sticky",
-      top: 0,
-      zIndex: 100,
       padding: "0 40px",
       height: 64,
       display: "flex",
@@ -18,7 +15,6 @@ export default function Header() {
       justifyContent: "space-between",
       fontFamily: "'DM Sans', 'Segoe UI', sans-serif",
     }}>
-      {/* Logo */}
       <span
         onClick={() => router.push("/")}
         style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 22, fontWeight: 700, cursor: "pointer" }}
@@ -26,18 +22,7 @@ export default function Header() {
         Ticket<span style={{ color: "#F4601A" }}>Match</span>
       </span>
 
-      {/* Nav links */}
-      <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-        <span onClick={() => router.push("/")} style={navLink}>Éditeurs</span>
-        <span onClick={() => router.push("/comparateur")} style={navLink}>Comparateur</span>
-        <span onClick={() => router.push("/avis")} style={navLink}>Avis</span>
-        <a href="https://tally.so/r/w4pOzN" target="_blank" rel="noopener noreferrer" style={navLink}>
-          Référencer ma solution
-        </a>
-      </div>
-
-      {/* CTA */}
-      <a
+      
         href="https://tally.so/r/0Qolz6"
         target="_blank"
         rel="noopener noreferrer"
@@ -49,7 +34,6 @@ export default function Header() {
           fontSize: 13,
           fontWeight: 700,
           textDecoration: "none",
-          cursor: "pointer",
         }}
       >
         Demander une démo
@@ -57,12 +41,3 @@ export default function Header() {
     </nav>
   );
 }
-
-const navLink: React.CSSProperties = {
-  fontSize: 14,
-  fontWeight: 500,
-  color: "#444",
-  cursor: "pointer",
-  textDecoration: "none",
-  transition: "color 0.15s",
-};
