@@ -227,7 +227,7 @@ export default function SolutionPage() {
             </div>
 
             {/* Contact */}
-            <div style={{ background: "linear-gradient(135deg, #fff7f4, #fff)", borderRadius: 16, padding: 28, border: "1.5px solid #fdd9cc" }}>
+            <div style={{ background: "linear-gradient(135deg, #f4ffe0, #fff)", borderRadius: 16, padding: 28, border: "1.5px solid #d4f5a0" }}>
               <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 18, fontWeight: 700, marginBottom: 10 }}>Intéressé ?</h2>
               <p style={{ fontSize: 13, color: "#777", lineHeight: 1.6, marginBottom: 16 }}>Demandez une démonstration gratuite ou plus d'informations.</p>
               <a
