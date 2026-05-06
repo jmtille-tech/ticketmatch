@@ -93,22 +93,6 @@ export default function SolutionPage() {
         * { box-sizing: border-box; margin: 0; padding: 0; }
       `}</style>
 
-      {/* NAV */}
-      <nav style={{
-        background: "#fff", borderBottom: "1px solid #ebebeb",
-        position: "sticky", top: 0, zIndex: 100,
-        padding: "0 40px", height: 60,
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-      }}>
-        <span onClick={() => router.push("/")}
-          style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 22, fontWeight: 700, cursor: "pointer" }}>
-          Ticket<span style={{ color: "#F4601A" }}>Match</span>
-        </span>
-        <button onClick={() => router.push("/")}
-          style={{ background: "transparent", color: "#555", border: "1.5px solid #e0e0e0", borderRadius: 8, padding: "8px 18px", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
-          ← Retour aux solutions
-        </button>
-      </nav>
 
       <div style={{ maxWidth: 960, margin: "0 auto", padding: "48px 40px" }}>
 
