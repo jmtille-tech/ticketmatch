@@ -79,7 +79,7 @@ function SolutionCard({ sol, compare, onToggleCompare }: { sol: any; compare: nu
             Voir la fiche →
           </button>
           <button onClick={() => onToggleCompare(sol.id)} style={{
-            background: isInCompare ? "#fff0eb" : "#f8f8f8",
+            background: isInCompare ? "#f4ffe0" : "#f8f8f8",
             color: isInCompare ? "#c8f135" : "#888",
             border: isInCompare ? "1px solid #c8f135" : "1px solid #e5e5e5",
             borderRadius: 6, padding: "4px 10px", fontSize: 11, fontWeight: 600, cursor: "pointer",
