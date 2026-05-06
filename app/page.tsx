@@ -229,9 +229,9 @@ export default function Home() {
               <div style={{ fontSize: 32, color: "#ccc" }}>＋</div>
               <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 17, fontWeight: 700, textAlign: "center" }}>Vous êtes éditeur ?</div>
               <div style={{ fontSize: 13, color: "#aaa", textAlign: "center", lineHeight: 1.6 }}>Référencez gratuitement votre solution.</div>
-              <button style={{ background: "transparent", color: "#F4601A", border: "2px solid #F4601A", borderRadius: 8, padding: "9px 18px", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>
-                Déposer ma fiche →
-              </button>
+             <a href="https://tally.so/r/LZ5Zj2" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "transparent", color: "#F4601A", border: "2px solid #F4601A", borderRadius: 8, padding: "9px 18px", fontSize: 13, fontWeight: 700, textDecoration: "none" }}>
+  Déposer ma fiche →
+</a>
             </div>
           </div>
         )}
