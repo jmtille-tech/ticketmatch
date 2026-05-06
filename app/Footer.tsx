@@ -12,7 +12,7 @@ export default function Footer() {
       color: "#aaa",
     }}>
       <span style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 18, fontWeight: 700, color: "#111" }}>
-        Ticket<span style={{ color: "#c8f135" }}>Match</span>
+        Ticket<span style={{ color: "#1a1f3a" }}>Match</span>
       </span>
       <a href="/mentions-legales" style={{ color: "#aaa", textDecoration: "none", fontSize: 13 }}>
         Mentions légales
