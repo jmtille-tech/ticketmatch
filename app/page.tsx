@@ -155,7 +155,7 @@ export default function Home() {
 
 
       {/* HERO */}
-      <section style={{ background: "linear-gradient(160deg, #fff 60%, #fff7f4 100%)", padding: "72px 40px 56px", maxWidth: 960, margin: "0 auto" }}>
+      <section style={{ background: "linear-gradient(160deg, #fff 60%, #f4ffe0 100%)", padding: "72px 40px 56px", maxWidth: 960, margin: "0 auto" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 8, border: "1.5px solid #c8f135", borderRadius: 6, padding: "4px 14px", marginBottom: 24, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#c8f135", textTransform: "uppercase" }}>
           🇫🇷 Marketplace française · Billetterie
         </div>
@@ -198,7 +198,7 @@ export default function Home() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12 }}>
           {sectors.map((s) => (
             <div key={s.label} className="sector-card" onClick={() => setActiveSector(activeSector === s.label ? null : s.label)}
-              style={{ background: activeSector === s.label ? "#fff7f4" : "#fff", border: activeSector === s.label ? "2px solid #c8f135" : "1.5px solid #e8e8e8", borderRadius: 12, padding: "18px 12px", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, cursor: "pointer", transition: "all 0.2s" }}>
+              style={{ background: activeSector === s.label ? "#f4ffe0" : "#fff", border: activeSector === s.label ? "2px solid #c8f135" : "1.5px solid #e8e8e8", borderRadius: 12, padding: "18px 12px", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, cursor: "pointer", transition: "all 0.2s" }}>
               <span style={{ fontSize: 28 }}>{s.emoji}</span>
               <span style={{ fontSize: 12, fontWeight: 600, textAlign: "center", color: "#222" }}>{s.label}</span>
               <span style={{ fontSize: 11, color: "#aaa" }}>{sectorCounts[s.label] || 0} solutions</span>
@@ -268,7 +268,7 @@ export default function Home() {
             <div style={{ display: "grid", gridTemplateColumns: `200px repeat(${compareSolutions.length}, 1fr)`, gap: 0, marginBottom: 8 }}>
               <div />
               {compareSolutions.map((s) => (
-                <div key={s.id} style={{ textAlign: "center", padding: "12px 8px", background: "#fff7f4", borderRadius: 8, margin: "0 4px", fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 700, fontSize: 16 }}>
+                <div key={s.id} style={{ textAlign: "center", padding: "12px 8px", background: "#f4ffe0", borderRadius: 8, margin: "0 4px", fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 700, fontSize: 16 }}>
                   {s.name}
                   <div style={{ fontSize: 12, color: "#aaa", fontFamily: "DM Sans, sans-serif", fontWeight: 400, marginTop: 4 }}>⭐ {s.rating} · {s.reviews} avis</div>
                 </div>
