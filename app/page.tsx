@@ -24,7 +24,7 @@ function Stars({ rating }: { rating: number }) {
         <svg key={i} width="14" height="14" viewBox="0 0 24 24">
           <polygon
             points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
-            fill={rating >= i ? "#c8f135" : "#e5e7eb"}
+            fill={rating >= i ? "#a8d8b0" : "#e5e7eb"}
             stroke="none"
           />
         </svg>
@@ -42,16 +42,16 @@ function SolutionCard({ sol, compare, onToggleCompare }: { sol: any; compare: nu
   return (
     <div style={{
       background: "#fff",
-      border: isInCompare ? "2px solid #c8f135" : "1.5px solid #e8e8e8",
+      border: isInCompare ? "2px solid #a8d8b0" : "1.5px solid #e8e8e8",
       borderRadius: 16, padding: "28px 24px 22px",
       display: "flex", flexDirection: "column",
-      boxShadow: isInCompare ? "0 0 0 4px rgba(244,96,26,0.08)" : "0 2px 12px rgba(0,0,0,0.05)",
+      boxShadow: isInCompare ? "0 0 0 4px rgba(168,216,176,0.08)" : "0 2px 12px rgba(0,0,0,0.05)",
       position: "relative",
     }}>
       <div style={{
         position: "absolute", top: 16, right: 16,
         fontSize: 10, fontWeight: 700, letterSpacing: "0.08em",
-        color: sol.badge_type === "featured" ? "#c8f135" : "#22c55e",
+        color: sol.badge_type === "featured" ? "#a8d8b0" : "#22c55e",
       }}>
         {sol.badge_type === "featured" ? "⭐ " : "✔ "}{sol.badge}
       </div>
@@ -75,13 +75,13 @@ function SolutionCard({ sol, compare, onToggleCompare }: { sol: any; compare: nu
           <span style={{ fontSize: 12, color: "#aaa" }}>{sol.rating} · {sol.reviews} avis</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 6, alignItems: "flex-end" }}>
-          <button onClick={() => router.push(`/solutions/${sol.id}`)} style={{ background: "#c8f135", color: "#fff", border: "none", borderRadius: 8, padding: "8px 16px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
+          <button onClick={() => router.push(`/solutions/${sol.id}`)} style={{ background: "#a8d8b0", color: "#fff", border: "none", borderRadius: 8, padding: "8px 16px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
             Voir la fiche →
           </button>
           <button onClick={() => onToggleCompare(sol.id)} style={{
-            background: isInCompare ? "#f4ffe0" : "#f8f8f8",
-            color: isInCompare ? "#c8f135" : "#888",
-            border: isInCompare ? "1px solid #c8f135" : "1px solid #e5e5e5",
+            background: isInCompare ? "#f0faf2" : "#f8f8f8",
+            color: isInCompare ? "#a8d8b0" : "#888",
+            border: isInCompare ? "1px solid #a8d8b0" : "1px solid #e5e5e5",
             borderRadius: 6, padding: "4px 10px", fontSize: 11, fontWeight: 600, cursor: "pointer",
           }}>
             {isInCompare ? "✔ Sélectionné" : "+ Comparer"}
@@ -146,22 +146,21 @@ export default function Home() {
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         button:hover { opacity: 0.88; }
-        .sector-card:hover { border-color: #c8f135 !important; transform: translateY(-2px); }
+        .sector-card:hover { border-color: #a8d8b0 !important; transform: translateY(-2px); }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
         .card-anim { animation: fadeIn 0.4s ease both; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
         .compare-bar { animation: slideUp 0.3s ease; }
       `}</style>
 
-
       {/* HERO */}
-      <section style={{ background: "linear-gradient(160deg, #fff 60%, #f4ffe0 100%)", padding: "72px 40px 56px", maxWidth: 960, margin: "0 auto" }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 8, border: "1.5px solid #c8f135", borderRadius: 6, padding: "4px 14px", marginBottom: 24, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#c8f135", textTransform: "uppercase" }}>
+      <section style={{ background: "linear-gradient(160deg, #fff 60%, #f0faf2 100%)", padding: "72px 40px 56px", maxWidth: 960, margin: "0 auto" }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 8, border: "1.5px solid #a8d8b0", borderRadius: 6, padding: "4px 14px", marginBottom: 24, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#a8d8b0", textTransform: "uppercase" }}>
           🇫🇷 Marketplace française · Billetterie
         </div>
         <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 700, lineHeight: 1.12, marginBottom: 20, color: "#111" }}>
           Trouvez la solution de billetterie{" "}
-          <span style={{ color: "#c8f135", fontStyle: "italic" }}>faite pour vous</span>
+          <span style={{ color: "#a8d8b0", fontStyle: "italic" }}>faite pour vous</span>
         </h1>
         <p style={{ fontSize: 16, color: "#777", maxWidth: 520, lineHeight: 1.7, marginBottom: 36 }}>
           Comparez les éditeurs français et internationaux selon votre secteur, votre jauge et votre budget. Sans démarchage commercial.
@@ -175,7 +174,7 @@ export default function Home() {
             style={{ border: "none", background: "transparent", padding: "0 16px", fontSize: 13, color: "#555", fontFamily: "inherit", cursor: "pointer", height: 52 }}>
             {allSectors.map(s => <option key={s}>{s}</option>)}
           </select>
-          <button style={{ background: "#c8f135", color: "#fff", border: "none", padding: "0 24px", height: 52, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>
+          <button style={{ background: "#a8d8b0", color: "#fff", border: "none", padding: "0 24px", height: 52, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>
             Rechercher
           </button>
         </div>
@@ -193,12 +192,12 @@ export default function Home() {
       <section style={{ padding: "0 40px 48px", maxWidth: 960, margin: "0 auto" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
           <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 26, fontWeight: 700 }}>Parcourir par secteur</h2>
-          <span style={{ color: "#c8f135", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>Voir tous les secteurs →</span>
+          <span style={{ color: "#a8d8b0", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>Voir tous les secteurs →</span>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12 }}>
           {sectors.map((s) => (
             <div key={s.label} className="sector-card" onClick={() => setActiveSector(activeSector === s.label ? null : s.label)}
-              style={{ background: activeSector === s.label ? "#f4ffe0" : "#fff", border: activeSector === s.label ? "2px solid #c8f135" : "1.5px solid #e8e8e8", borderRadius: 12, padding: "18px 12px", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, cursor: "pointer", transition: "all 0.2s" }}>
+              style={{ background: activeSector === s.label ? "#f0faf2" : "#fff", border: activeSector === s.label ? "2px solid #a8d8b0" : "1.5px solid #e8e8e8", borderRadius: 12, padding: "18px 12px", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, cursor: "pointer", transition: "all 0.2s" }}>
               <span style={{ fontSize: 28 }}>{s.emoji}</span>
               <span style={{ fontSize: 12, fontWeight: 600, textAlign: "center", color: "#222" }}>{s.label}</span>
               <span style={{ fontSize: 11, color: "#aaa" }}>{sectorCounts[s.label] || 0} solutions</span>
@@ -213,7 +212,7 @@ export default function Home() {
           <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 26, fontWeight: 700 }}>
             {activeSector ? `Solutions pour ${activeSector}` : "Toutes les solutions"}
           </h2>
-          <span style={{ color: "#c8f135", fontSize: 13, fontWeight: 600 }}>{filtered.length} solutions</span>
+          <span style={{ color: "#a8d8b0", fontSize: 13, fontWeight: 600 }}>{filtered.length} solutions</span>
         </div>
 
         {loading ? (
@@ -229,9 +228,9 @@ export default function Home() {
               <div style={{ fontSize: 32, color: "#ccc" }}>＋</div>
               <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 17, fontWeight: 700, textAlign: "center" }}>Vous êtes éditeur ?</div>
               <div style={{ fontSize: 13, color: "#aaa", textAlign: "center", lineHeight: 1.6 }}>Référencez gratuitement votre solution.</div>
-             <a href="https://tally.so/r/LZ5Zj2" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "transparent", color: "#c8f135", border: "2px solid #c8f135", borderRadius: 8, padding: "9px 18px", fontSize: 13, fontWeight: 700, textDecoration: "none" }}>
-  Déposer ma fiche →
-</a>
+              <a href="https://tally.so/r/LZ5Zj2" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "transparent", color: "#a8d8b0", border: "2px solid #a8d8b0", borderRadius: 8, padding: "9px 18px", fontSize: 13, fontWeight: 700, textDecoration: "none" }}>
+                Déposer ma fiche →
+              </a>
             </div>
           </div>
         )}
@@ -248,7 +247,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <button onClick={() => setShowCompare(true)} style={{ background: "#c8f135", color: "#fff", border: "none", borderRadius: 8, padding: "10px 22px", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>Comparer →</button>
+          <button onClick={() => setShowCompare(true)} style={{ background: "#a8d8b0", color: "#fff", border: "none", borderRadius: 8, padding: "10px 22px", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>Comparer →</button>
           <button onClick={() => setCompare([])} style={{ background: "transparent", color: "#666", border: "none", fontSize: 18, cursor: "pointer" }}>×</button>
         </div>
       )}
@@ -262,13 +261,13 @@ export default function Home() {
               <button onClick={() => setShowCompare(false)} style={{ background: "none", border: "none", fontSize: 24, cursor: "pointer", color: "#888" }}>×</button>
             </div>
             <div style={{ display: "flex", gap: 8, marginBottom: 28 }}>
-              <button onClick={() => setCompareTab("infos")} style={{ padding: "8px 20px", borderRadius: 8, border: "none", cursor: "pointer", fontWeight: 600, fontSize: 13, background: compareTab === "infos" ? "#c8f135" : "#f4f4f4", color: compareTab === "infos" ? "#fff" : "#555" }}>Infos clés</button>
-              <button onClick={() => setCompareTab("fonctions")} style={{ padding: "8px 20px", borderRadius: 8, border: "none", cursor: "pointer", fontWeight: 600, fontSize: 13, background: compareTab === "fonctions" ? "#c8f135" : "#f4f4f4", color: compareTab === "fonctions" ? "#fff" : "#555" }}>Fonctionnalités</button>
+              <button onClick={() => setCompareTab("infos")} style={{ padding: "8px 20px", borderRadius: 8, border: "none", cursor: "pointer", fontWeight: 600, fontSize: 13, background: compareTab === "infos" ? "#a8d8b0" : "#f4f4f4", color: compareTab === "infos" ? "#fff" : "#555" }}>Infos clés</button>
+              <button onClick={() => setCompareTab("fonctions")} style={{ padding: "8px 20px", borderRadius: 8, border: "none", cursor: "pointer", fontWeight: 600, fontSize: 13, background: compareTab === "fonctions" ? "#a8d8b0" : "#f4f4f4", color: compareTab === "fonctions" ? "#fff" : "#555" }}>Fonctionnalités</button>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: `200px repeat(${compareSolutions.length}, 1fr)`, gap: 0, marginBottom: 8 }}>
               <div />
               {compareSolutions.map((s) => (
-                <div key={s.id} style={{ textAlign: "center", padding: "12px 8px", background: "#f4ffe0", borderRadius: 8, margin: "0 4px", fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 700, fontSize: 16 }}>
+                <div key={s.id} style={{ textAlign: "center", padding: "12px 8px", background: "#f0faf2", borderRadius: 8, margin: "0 4px", fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 700, fontSize: 16 }}>
                   {s.name}
                   <div style={{ fontSize: 12, color: "#aaa", fontFamily: "DM Sans, sans-serif", fontWeight: 400, marginTop: 4 }}>⭐ {s.rating} · {s.reviews} avis</div>
                 </div>

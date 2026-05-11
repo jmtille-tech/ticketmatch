@@ -9,8 +9,8 @@ export default function MentionsLegales() {
           <p style={{ fontSize: 14, color: "#555", lineHeight: 1.8 }}>
             Digital Expertise<br />
             Immatriculation au RCS, numero 789 250 040 R.C.S. Chambery<br />
-            160 Avenue Pierre de Coubertin, 73100 Aix-les-Bains<br />
-            Email : jmtille@neuroplayxperiences.com
+            Lyon, France<br />
+            Email : contact@neuroplayxperiences.fr
           </p>
         </section>
 
@@ -38,7 +38,7 @@ export default function MentionsLegales() {
         <section style={{ marginBottom: 32 }}>
           <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 12 }}>Donnees personnelles</h2>
           <p style={{ fontSize: 14, color: "#555", lineHeight: 1.8 }}>
-            Les donnees collectees via les formulaires sont utilisees uniquement pour repondre aux demandes. Conformement au RGPD, vous disposez d'un droit d'acces, rectification et suppression. Contact : jmtille@neuroplayxperiences.com
+            Les donnees collectees via les formulaires sont utilisees uniquement pour repondre aux demandes. Conformement au RGPD, vous disposez d'un droit d'acces, rectification et suppression. Contact : contact@neuroplayxperiences.fr
           </p>
         </section>
 

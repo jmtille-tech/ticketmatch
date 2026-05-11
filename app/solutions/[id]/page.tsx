@@ -26,7 +26,7 @@ function Stars({ rating }: { rating: number }) {
         <svg key={i} width="18" height="18" viewBox="0 0 24 24">
           <polygon
             points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
-            fill={rating >= i ? "#c8f135" : "#e5e7eb"}
+            fill={rating >= i ? "#a8d8b0" : "#e5e7eb"}
           />
         </svg>
       ))}
@@ -93,7 +93,6 @@ export default function SolutionPage() {
         * { box-sizing: border-box; margin: 0; padding: 0; }
       `}</style>
 
-
       <div style={{ maxWidth: 960, margin: "0 auto", padding: "48px 40px" }}>
 
         {/* HEADER */}
@@ -128,7 +127,7 @@ export default function SolutionPage() {
                   href={solution.site_web}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ background: "#c8f135", color: "#fff", border: "none", borderRadius: 10, padding: "12px 24px", fontSize: 14, fontWeight: 700, cursor: "pointer", textDecoration: "none" }}
+                  style={{ background: "#a8d8b0", color: "#fff", border: "none", borderRadius: 10, padding: "12px 24px", fontSize: 14, fontWeight: 700, cursor: "pointer", textDecoration: "none" }}
                 >
                   Visiter le site →
                 </a>
@@ -137,7 +136,7 @@ export default function SolutionPage() {
                 href={`https://tally.so/r/xX9Xyd?solution=${encodeURIComponent(solution.name)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ background: "#fff", color: "#c8f135", border: "2px solid #c8f135", borderRadius: 10, padding: "12px 24px", fontSize: 14, fontWeight: 700, cursor: "pointer", textDecoration: "none" }}
+                style={{ background: "#fff", color: "#a8d8b0", border: "2px solid #a8d8b0", borderRadius: 10, padding: "12px 24px", fontSize: 14, fontWeight: 700, cursor: "pointer", textDecoration: "none" }}
               >
                 Laisser un avis
               </a>
@@ -227,14 +226,14 @@ export default function SolutionPage() {
             </div>
 
             {/* Contact */}
-            <div style={{ background: "linear-gradient(135deg, #f4ffe0, #fff)", borderRadius: 16, padding: 28, border: "1.5px solid #d4f5a0" }}>
+            <div style={{ background: "linear-gradient(135deg, #f0faf2, #fff)", borderRadius: 16, padding: 28, border: "1.5px solid #c8e8cc" }}>
               <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 18, fontWeight: 700, marginBottom: 10 }}>Intéressé ?</h2>
               <p style={{ fontSize: 13, color: "#777", lineHeight: 1.6, marginBottom: 16 }}>Demandez une démonstration gratuite ou plus d'informations.</p>
               <a
                 href={`https://tally.so/r/0Qolz6?solution=${encodeURIComponent(solution.name)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ display: "block", width: "100%", background: "#c8f135", color: "#fff", borderRadius: 8, padding: "12px 0", fontSize: 14, fontWeight: 600, cursor: "pointer", textAlign: "center", textDecoration: "none", marginBottom: 10 }}
+                style={{ display: "block", width: "100%", background: "#a8d8b0", color: "#fff", borderRadius: 8, padding: "12px 0", fontSize: 14, fontWeight: 600, cursor: "pointer", textAlign: "center", textDecoration: "none", marginBottom: 10 }}
               >
                 Demander une démo
               </a>
@@ -243,7 +242,7 @@ export default function SolutionPage() {
                   href={solution.site_web}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ display: "block", width: "100%", background: "#fff", color: "#c8f135", border: "2px solid #c8f135", borderRadius: 8, padding: "12px 0", fontSize: 14, fontWeight: 700, cursor: "pointer", textAlign: "center", textDecoration: "none" }}
+                  style={{ display: "block", width: "100%", background: "#fff", color: "#a8d8b0", border: "2px solid #a8d8b0", borderRadius: 8, padding: "12px 0", fontSize: 14, fontWeight: 700, cursor: "pointer", textAlign: "center", textDecoration: "none" }}
                 >
                   Visiter le site
                 </a>
