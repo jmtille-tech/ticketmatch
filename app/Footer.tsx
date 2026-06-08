@@ -11,12 +11,20 @@ export default function Footer() {
       fontSize: 13,
       color: "#aaa",
     }}>
+      {/* Logo */}
       <span style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 18, fontWeight: 700, color: "#111" }}>
-        Ticket<span style={{ color: "#c8f135" }}>Match</span>
+        Ticket<span style={{ color: "#F4601A" }}>Match</span>
       </span>
-      <a href="/mentions-legales" style={{ color: "#aaa", textDecoration: "none", fontSize: 13 }}>
+
+      {/* Mentions légales */}
+      <a
+        href="/mentions-legales"
+        style={{ color: "#aaa", textDecoration: "none", fontSize: 13 }}
+      >
         Mentions légales
       </a>
+
+      {/* Copyright */}
       <span>© {new Date().getFullYear()} TicketMatch. Tous droits réservés.</span>
     </footer>
   );
