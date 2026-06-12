@@ -103,15 +103,35 @@ export default function SolutionPage() {
 
         {/* HEADER CARD */}
         <div style={{ background: "#fff", borderRadius: 20, padding: cardPad, border: "1.5px solid #e8e8e8", marginBottom: 32, boxShadow: "0 2px 16px rgba(0,0,0,0.05)" }}>
-          <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "flex-start" : "flex-start", justifyContent: "space-between", gap: 20 }}>
+          <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: "flex-start", justifyContent: "space-between", gap: 20 }}>
             <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "flex-start" : "center", gap: isMobile ? 12 : 20 }}>
               <div style={{ width: 64, height: 64, borderRadius: 16, background: "#f5f5f5", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28, fontWeight: 700, color: "#888", fontFamily: "'Playfair Display', Georgia, serif", flexShrink: 0 }}>{solution.initial}</div>
               <div>
                 <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: isMobile ? 26 : 32, fontWeight: 700, color: "#111", marginBottom: 8 }}>{solution.name}</h1>
+
+                {/* BLOC AVIS — conditionnel */}
                 <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
                   <Stars rating={solution.rating || 0} />
-                  <span style={{ fontSize: 13, color: "#777" }}>{solution.rating} · {solution.reviews} avis</span>
+                  {solution.rating && solution.reviews ? (
+                    <>
+                      <span style={{ fontSize: 13, color: "#777" }}>{solution.rating} · {solution.reviews} avis</span>
+                      {solution.reviews_url && (
+                        <a href={solution.reviews_url} target="_blank" rel="noopener noreferrer"
+                          style={{ fontSize: 12, color: "#a8d8b0", fontWeight: 600, textDecoration: "none", background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 6, padding: "3px 10px" }}>
+                          {solution.reviews_source || "Voir les avis"} →
+                        </a>
+                      )}
+                    </>
+                  ) : solution.reviews_url ? (
+                    <a href={solution.reviews_url} target="_blank" rel="noopener noreferrer"
+                      style={{ fontSize: 12, color: "#777", fontWeight: 600, textDecoration: "none", background: "#f9f9f9", border: "1px solid #e5e5e5", borderRadius: 6, padding: "5px 12px" }}>
+                      🔍 Voir les avis {solution.reviews_source ? `sur ${solution.reviews_source}` : ""}
+                    </a>
+                  ) : (
+                    <span style={{ fontSize: 12, color: "#bbb", fontStyle: "italic" }}>Aucun avis disponible</span>
+                  )}
                 </div>
+
               </div>
             </div>
             <div style={{ display: "flex", flexDirection: isMobile ? "row" : "column", gap: 10, alignItems: isMobile ? "center" : "flex-end", width: isMobile ? "100%" : "auto" }}>
