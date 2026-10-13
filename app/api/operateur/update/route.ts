@@ -36,6 +36,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Token invalide" }, { status: 403 });
     }
 
+    // Validation des champs obligatoires
+    const requiredFields = ["desc", "secteur_principal"];
+    for (const field of requiredFields) {
+      const val = fields[field];
+      if (!val || String(val).trim() === "") {
+        return NextResponse.json(
+          { error: `Le champ "${field}" est obligatoire.` },
+          { status: 400 }
+        );
+      }
+    }
+
     // Filtrer uniquement les champs autorisés
     const safeFields: Record<string, any> = {};
     for (const key of Object.keys(fields)) {

@@ -172,6 +172,17 @@ export default function OperateurEditPage() {
   };
 
   const handleSave = async () => {
+    // Validation des champs obligatoires
+    const desc = (fields["desc"] || "").toString().trim();
+    const secteur = (fields["secteur_principal"] || "").toString().trim();
+    if (!desc) {
+      setError("La description est obligatoire.");
+      return;
+    }
+    if (!secteur) {
+      setError("Le secteur principal est obligatoire.");
+      return;
+    }
     setSaving(true);
     setError(null);
     try {

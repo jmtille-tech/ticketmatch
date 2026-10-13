@@ -1,0 +1,117 @@
+
+🎟️  Liens TicketMatch — validation des fiches opérateurs
+
+────────────────────────────────────────────────────────────────────────────────
+
+📋 4escape (id: 68)
+   https://ticketmatch-two.vercel.app/operateur/68?token=Njg6dG0tc2VjcmV0LTIwMjQ
+
+📋 Accesso (id: 43)
+   https://ticketmatch-two.vercel.app/operateur/43?token=NDM6dG0tc2VjcmV0LTIwMjQ
+
+📋 Apex (id: 64)
+   https://ticketmatch-two.vercel.app/operateur/64?token=NjQ6dG0tc2VjcmV0LTIwMjQ
+
+📋 Axs (id: 53)
+   https://ticketmatch-two.vercel.app/operateur/53?token=NTM6dG0tc2VjcmV0LTIwMjQ
+
+📋 Billetweb (id: 47)
+   https://ticketmatch-two.vercel.app/operateur/47?token=NDc6dG0tc2VjcmV0LTIwMjQ
+
+📋 Bookeo (id: 69)
+   https://ticketmatch-two.vercel.app/operateur/69?token=Njk6dG0tc2VjcmV0LTIwMjQ
+
+📋 Bookingkit (id: 70)
+   https://ticketmatch-two.vercel.app/operateur/70?token=NzA6dG0tc2VjcmV0LTIwMjQ
+
+📋 Connect&GO (id: 42)
+   https://ticketmatch-two.vercel.app/operateur/42?token=NDI6dG0tc2VjcmV0LTIwMjQ
+
+📋 Convious (id: 39)
+   https://ticketmatch-two.vercel.app/operateur/39?token=Mzk6dG0tc2VjcmV0LTIwMjQ
+
+📋 Elloha (id: 57)
+   https://ticketmatch-two.vercel.app/operateur/57?token=NTc6dG0tc2VjcmV0LTIwMjQ
+
+📋 Eventbrite (id: 50)
+   https://ticketmatch-two.vercel.app/operateur/50?token=NTA6dG0tc2VjcmV0LTIwMjQ
+
+📋 Experticket (id: 59)
+   https://ticketmatch-two.vercel.app/operateur/59?token=NTk6dG0tc2VjcmV0LTIwMjQ
+
+📋 Fareharbor (id: 60)
+   https://ticketmatch-two.vercel.app/operateur/60?token=NjA6dG0tc2VjcmV0LTIwMjQ
+
+📋 France Billet (id: 49)
+   https://ticketmatch-two.vercel.app/operateur/49?token=NDk6dG0tc2VjcmV0LTIwMjQ
+
+📋 Guidap (id: 65)
+   https://ticketmatch-two.vercel.app/operateur/65?token=NjU6dG0tc2VjcmV0LTIwMjQ
+
+📋 HelloAsso (id: 51)
+   https://ticketmatch-two.vercel.app/operateur/51?token=NTE6dG0tc2VjcmV0LTIwMjQ
+
+📋 Intence (id: 58)
+   https://ticketmatch-two.vercel.app/operateur/58?token=NTg6dG0tc2VjcmV0LTIwMjQ
+
+📋 Mapado (id: 45)
+   https://ticketmatch-two.vercel.app/operateur/45?token=NDU6dG0tc2VjcmV0LTIwMjQ
+
+📋 Omniris (id: 55)
+   https://ticketmatch-two.vercel.app/operateur/55?token=NTU6dG0tc2VjcmV0LTIwMjQ
+
+📋 Peek Pro (id: 41)
+   https://ticketmatch-two.vercel.app/operateur/41?token=NDE6dG0tc2VjcmV0LTIwMjQ
+
+📋 Placeminute (id: 54)
+   https://ticketmatch-two.vercel.app/operateur/54?token=NTQ6dG0tc2VjcmV0LTIwMjQ
+
+📋 Qweekle (id: 73)
+   https://ticketmatch-two.vercel.app/operateur/73?token=NzM6dG0tc2VjcmV0LTIwMjQ
+
+📋 Regiondo (id: 40)
+   https://ticketmatch-two.vercel.app/operateur/40?token=NDA6dG0tc2VjcmV0LTIwMjQ
+
+📋 Rodrigue (id: 67)
+   https://ticketmatch-two.vercel.app/operateur/67?token=Njc6dG0tc2VjcmV0LTIwMjQ
+
+📋 Roller (id: 62)
+   https://ticketmatch-two.vercel.app/operateur/62?token=NjI6dG0tc2VjcmV0LTIwMjQ
+
+📋 Secutix (id: 44)
+   https://ticketmatch-two.vercel.app/operateur/44?token=NDQ6dG0tc2VjcmV0LTIwMjQ
+
+📋 SeeTickets (id: 56)
+   https://ticketmatch-two.vercel.app/operateur/56?token=NTY6dG0tc2VjcmV0LTIwMjQ
+
+📋 Smeetz (id: 38)
+   https://ticketmatch-two.vercel.app/operateur/38?token=Mzg6dG0tc2VjcmV0LTIwMjQ
+
+📋 Ticket Tailor (id: 61)
+   https://ticketmatch-two.vercel.app/operateur/61?token=NjE6dG0tc2VjcmV0LTIwMjQ
+
+📋 Ticketac (id: 72)
+   https://ticketmatch-two.vercel.app/operateur/72?token=NzI6dG0tc2VjcmV0LTIwMjQ
+
+📋 Ticketcorner (id: 71)
+   https://ticketmatch-two.vercel.app/operateur/71?token=NzE6dG0tc2VjcmV0LTIwMjQ
+
+📋 Ticketmaster (id: 48)
+   https://ticketmatch-two.vercel.app/operateur/48?token=NDg6dG0tc2VjcmV0LTIwMjQ
+
+📋 Vintia (id: 66)
+   https://ticketmatch-two.vercel.app/operateur/66?token=NjY6dG0tc2VjcmV0LTIwMjQ
+
+📋 Vivaticket (id: 63)
+   https://ticketmatch-two.vercel.app/operateur/63?token=NjM6dG0tc2VjcmV0LTIwMjQ
+
+📋 Vivenu (id: 52)
+   https://ticketmatch-two.vercel.app/operateur/52?token=NTI6dG0tc2VjcmV0LTIwMjQ
+
+📋 Weezevent (id: 46)
+   https://ticketmatch-two.vercel.app/operateur/46?token=NDY6dG0tc2VjcmV0LTIwMjQ
+
+────────────────────────────────────────────────────────────────────────────────
+
+✅ 36 lien(s) généré(s)
+
