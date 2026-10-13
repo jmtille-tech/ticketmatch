@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { supabase } from "../../../lib/supabase";
+import { DIAGNOSTIC_URL } from "../../../lib/links";
 
 const isTrue = (val: any) => val === true || val === "TRUE" || val === "true" || val === "Oui" || val === "oui";
 
@@ -103,24 +104,38 @@ export default function SolutionPage() {
 
         {/* HEADER CARD */}
         <div style={{ background: "#fff", borderRadius: 20, padding: cardPad, border: "1.5px solid #e8e8e8", marginBottom: 32, boxShadow: "0 2px 16px rgba(0,0,0,0.05)" }}>
-          <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "flex-start" : "flex-start", justifyContent: "space-between", gap: 20 }}>
+          <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: "flex-start", justifyContent: "space-between", gap: 20 }}>
             <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "flex-start" : "center", gap: isMobile ? 12 : 20 }}>
               <div style={{ width: 64, height: 64, borderRadius: 16, background: "#f5f5f5", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28, fontWeight: 700, color: "#888", fontFamily: "'Playfair Display', Georgia, serif", flexShrink: 0 }}>{solution.initial}</div>
               <div>
                 <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: isMobile ? 26 : 32, fontWeight: 700, color: "#111", marginBottom: 8 }}>{solution.name}</h1>
+
+                {/* BLOC AVIS — conditionnel */}
                 <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
                   <Stars rating={solution.rating || 0} />
-                  <span style={{ fontSize: 13, color: "#777" }}>{solution.rating} · {solution.reviews} avis</span>
+                  {solution.rating && solution.reviews ? (
+                    <>
+                      <span style={{ fontSize: 13, color: "#777" }}>{solution.rating} · {solution.reviews} avis</span>
+                      {solution.reviews_url && (
+                        <a href={solution.reviews_url} target="_blank" rel="noopener noreferrer"
+                          style={{ fontSize: 12, color: "#a8d8b0", fontWeight: 600, textDecoration: "none", background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 6, padding: "3px 10px" }}>
+                          {solution.reviews_source || "Voir les avis"} →
+                        </a>
+                      )}
+                    </>
+                  ) : solution.reviews_url ? (
+                    <a href={solution.reviews_url} target="_blank" rel="noopener noreferrer"
+                      style={{ fontSize: 12, color: "#777", fontWeight: 600, textDecoration: "none", background: "#f9f9f9", border: "1px solid #e5e5e5", borderRadius: 6, padding: "5px 12px" }}>
+                      🔍 Voir les avis {solution.reviews_source ? `sur ${solution.reviews_source}` : ""}
+                    </a>
+                  ) : (
+                    <span style={{ fontSize: 12, color: "#bbb", fontStyle: "italic" }}>Aucun avis disponible</span>
+                  )}
                 </div>
+
               </div>
             </div>
             <div style={{ display: "flex", flexDirection: isMobile ? "row" : "column", gap: 10, alignItems: isMobile ? "center" : "flex-end", width: isMobile ? "100%" : "auto" }}>
-              {solution.site_web && (
-                <a href={solution.site_web} target="_blank" rel="noopener noreferrer"
-                  style={{ flex: isMobile ? 1 : "none", background: "#a8d8b0", color: "#fff", borderRadius: 10, padding: "12px 20px", fontSize: 13, fontWeight: 700, textDecoration: "none", textAlign: "center" }}>
-                  Visiter le site →
-                </a>
-              )}
               <a href={`https://tally.so/r/xX9Xyd?solution=${encodeURIComponent(solution.name)}`} target="_blank" rel="noopener noreferrer"
                 style={{ flex: isMobile ? 1 : "none", background: "#fff", color: "#a8d8b0", border: "2px solid #a8d8b0", borderRadius: 10, padding: "12px 20px", fontSize: 13, fontWeight: 700, textDecoration: "none", textAlign: "center" }}>
                 Laisser un avis
@@ -208,17 +223,13 @@ export default function SolutionPage() {
 
             <div style={{ background: "linear-gradient(135deg, #f0faf2, #fff)", borderRadius: 16, padding: cardPad, border: "1.5px solid #c8e8cc" }}>
               <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 18, fontWeight: 700, marginBottom: 10 }}>Intéressé ?</h2>
-              <p style={{ fontSize: 13, color: "#777", lineHeight: 1.6, marginBottom: 16 }}>Demandez une démonstration gratuite ou plus d'informations.</p>
-              <a href={`https://tally.so/r/0Qolz6?solution=${encodeURIComponent(solution.name)}`} target="_blank" rel="noopener noreferrer"
-                style={{ display: "block", width: "100%", background: "#a8d8b0", color: "#fff", borderRadius: 8, padding: "12px 0", fontSize: 14, fontWeight: 600, cursor: "pointer", textAlign: "center", textDecoration: "none", marginBottom: 10 }}>
-                Demander une démo
+              <p style={{ fontSize: 13, color: "#777", lineHeight: 1.6, marginBottom: 16 }}>
+                Ce n&apos;est peut-être pas la seule solution adaptée à votre profil. Faites le diagnostic pour obtenir une liste priorisée, incluant celle-ci si elle correspond.
+              </p>
+              <a href={DIAGNOSTIC_URL}
+                style={{ display: "block", width: "100%", background: "#a8d8b0", color: "#fff", borderRadius: 8, padding: "12px 0", fontSize: 14, fontWeight: 600, cursor: "pointer", textAlign: "center", textDecoration: "none" }}>
+                Obtenir ma liste adaptée →
               </a>
-              {solution.site_web && (
-                <a href={solution.site_web} target="_blank" rel="noopener noreferrer"
-                  style={{ display: "block", width: "100%", background: "#fff", color: "#a8d8b0", border: "2px solid #a8d8b0", borderRadius: 8, padding: "12px 0", fontSize: 14, fontWeight: 700, cursor: "pointer", textAlign: "center", textDecoration: "none" }}>
-                  Visiter le site
-                </a>
-              )}
             </div>
           </div>
         </div>
@@ -226,3 +237,4 @@ export default function SolutionPage() {
     </div>
   );
 }
+

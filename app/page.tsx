@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "../lib/supabase";
+import { DIAGNOSTIC_URL } from "../lib/links";
 
 const sectors = [
   { label: "Spectacle vivant", emoji: "🎭", count: 16 },
@@ -15,7 +16,6 @@ const sectors = [
   { label: "Zoos & Parcs animaliers", emoji: "🦁", count: 4 },
 ];
 
-const allSectors = ["Tous les secteurs", ...sectors.map((s) => s.label)];
 
 function Stars({ rating }: { rating: number }) {
   return (
@@ -34,6 +34,42 @@ function Stars({ rating }: { rating: number }) {
 }
 
 const isTrue = (val: any) => val === true || val === "TRUE" || val === "true" || val === "Oui" || val === "oui";
+
+// Liste centralisée des fonctionnalités (colonne booléenne + libellé affiché).
+// Utilisée à la fois par le tableau de comparaison et par la recherche du hero,
+// pour que taper "tarification dynamique" retrouve bien les éditeurs qui l'ont.
+const FEATURES = [
+  { label: "Paiement intégré", key: "paiement_integre" },
+  { label: "Caisse certifiée", key: "caisse_certifiee" },
+  { label: "Bornes billetterie", key: "bornes_billet" },
+  { label: "Cashless", key: "cashless" },
+  { label: "Vente sur place", key: "vente_sur_place" },
+  { label: "Vente en ligne", key: "vente_en_ligne" },
+  { label: "Bornes F&B", key: "bornes_fb" },
+  { label: "Contrôle accès", key: "controle_acces" },
+  { label: "Tarif dynamique", key: "tarification_dynamique" },
+  { label: "Groupes", key: "gestion_groupes" },
+  { label: "CSE", key: "gestion_cse" },
+  { label: "CRM intégré", key: "crm_integre" },
+  { label: "API ouverte", key: "api_ouverte" },
+  { label: "Plan de salle", key: "plan_de_salle" },
+  { label: "Multidevise", key: "multidevise" },
+  { label: "Pass Culture", key: "pass_culture" },
+  { label: "Chorus Pro", key: "chorus_pro_integre" },
+  { label: "OTAs", key: "otas" },
+];
+
+// Compare le texte tapé par l'utilisateur au libellé d'une fonctionnalité mot à mot
+// (plutôt qu'une simple inclusion de chaîne), pour tolérer les variantes
+// ("tarification dynamique" doit retrouver le libellé "Tarif dynamique").
+function matchesFeatureLabel(searchTerm: string, label: string) {
+  const searchWords = searchTerm.toLowerCase().split(/\s+/).filter(Boolean);
+  const labelWords = label.toLowerCase().split(/\s+/).filter(Boolean);
+  if (searchWords.length === 0) return false;
+  return searchWords.some((sw) =>
+    labelWords.some((lw) => lw.startsWith(sw) || sw.startsWith(lw))
+  );
+}
 
 function SolutionCard({ sol, compare, onToggleCompare }: { sol: any; compare: number[]; onToggleCompare: (id: number) => void }) {
   const router = useRouter();
@@ -84,7 +120,7 @@ function SolutionCard({ sol, compare, onToggleCompare }: { sol: any; compare: nu
             border: isInCompare ? "1px solid #a8d8b0" : "1px solid #e5e5e5",
             borderRadius: 6, padding: "4px 10px", fontSize: 11, fontWeight: 600, cursor: "pointer",
           }}>
-            {isInCompare ? "✔ Sélectionné" : "+ Comparer"}
+            {isInCompare ? "✔ Ajouté au comparateur" : "+ Ajouter à comparer"}
           </button>
         </div>
       </div>
@@ -96,7 +132,6 @@ export default function Home() {
   const [solutions, setSolutions] = useState<any[]>([]);
   const [search, setSearch] = useState("");
   const [activeSector, setActiveSector] = useState<string | null>(null);
-  const [selectedSector, setSelectedSector] = useState("Tous les secteurs");
   const [compare, setCompare] = useState<number[]>([]);
   const [showCompare, setShowCompare] = useState(false);
   const [compareTab, setCompareTab] = useState("infos");
@@ -127,7 +162,8 @@ export default function Home() {
     const matchSearch = !search ||
       s.name?.toLowerCase().includes(search.toLowerCase()) ||
       s.desc?.toLowerCase().includes(search.toLowerCase()) ||
-      s.tags?.toLowerCase().includes(search.toLowerCase());
+      s.tags?.toLowerCase().includes(search.toLowerCase()) ||
+      FEATURES.some((f) => isTrue(s[f.key]) && matchesFeatureLabel(search, f.label));
     const matchSector = !activeSector ||
       s.secteurs_secondaires?.toLowerCase().includes(activeSector.toLowerCase()) ||
       s.secteur_principal?.toLowerCase().includes(activeSector.toLowerCase());
@@ -191,14 +227,28 @@ export default function Home() {
           🇫🇷 Marketplace française · Billetterie
         </div>
         <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(28px, 5vw, 56px)", fontWeight: 700, lineHeight: 1.12, marginBottom: 20, color: "#111" }}>
-          Trouvez la solution de billetterie{" "}
-          <span style={{ color: "#a8d8b0", fontStyle: "italic" }}>faite pour vous</span>
+          La bonne solution de billetterie,{" "}
+          <span style={{ color: "#a8d8b0", fontStyle: "italic" }}>sans filtre commercial</span>
         </h1>
         <p style={{ fontSize: 15, color: "#777", maxWidth: 520, lineHeight: 1.7, marginBottom: 28 }}>
-          Comparez les éditeurs français et internationaux selon votre secteur, votre jauge et votre budget. Sans démarchage commercial.
+          Répondez à quelques questions sur votre activité et vos besoins : on identifie pour vous les opérateurs les plus adaptés parmi les solutions référencées.
         </p>
 
-        {/* SEARCH BAR */}
+        {/* CTA PRINCIPAL — diagnostic */}
+        <div style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap", marginBottom: 28 }}>
+          <a href={DIAGNOSTIC_URL} style={{ background: "#a8d8b0", color: "#fff", fontSize: 15, fontWeight: 700, padding: "16px 26px", borderRadius: 10, textDecoration: "none", boxShadow: "0 10px 24px rgba(168,216,176,0.35)" }}>
+            Obtenez gratuitement ma liste adaptée →
+          </a>
+          <span style={{ fontSize: 13, color: "#999" }}>10 questions · 20 à 30 minutes</span>
+        </div>
+
+        <div style={{ display: "flex", alignItems: "center", gap: 14, maxWidth: 620, marginBottom: 20 }}>
+          <div style={{ flex: 1, height: 1, background: "#e5e3da" }} />
+          <span style={{ fontSize: 11, color: "#aaa", fontWeight: 700, letterSpacing: "0.06em" }}>OU PARCOUREZ LIBREMENT</span>
+          <div style={{ flex: 1, height: 1, background: "#e5e3da" }} />
+        </div>
+
+        {/* SEARCH BAR — recherche libre, sans le filtre secteur (redondant avec la grille ci-dessous) */}
         <div className="search-bar">
           <span style={{ padding: "0 14px", color: "#bbb", fontSize: 18 }}>🔍</span>
           <input
@@ -207,14 +257,6 @@ export default function Home() {
             placeholder="Nom d'un éditeur, fonctionnalité, secteur…"
             style={{ flex: 1, border: "none", fontSize: 14, padding: "16px 0", background: "transparent", color: "#111", outline: "none", minWidth: 0 }}
           />
-          <div style={{ width: 1, height: 28, background: "#e8e8e8" }} />
-          <select
-            className="search-select"
-            value={selectedSector}
-            onChange={(e) => { setSelectedSector(e.target.value); setActiveSector(e.target.value === "Tous les secteurs" ? null : e.target.value); }}
-          >
-            {allSectors.map(s => <option key={s}>{s}</option>)}
-          </select>
           <button className="search-btn">Rechercher</button>
         </div>
 
@@ -223,7 +265,6 @@ export default function Home() {
             { n: solutions.length.toString(), label: "Éditeurs référencés" },
             { n: "9", label: "Secteurs couverts" },
             { n: "312", label: "Avis vérifiés" },
-            { n: "Gratuit", label: "Pour les exploitants" },
           ].map((s) => (
             <div key={s.label}>
               <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(20px, 4vw, 28px)", fontWeight: 700 }}>{s.n}</div>
@@ -235,9 +276,8 @@ export default function Home() {
 
       {/* SECTORS */}
       <section className="section-pad" style={{ maxWidth: 960, margin: "0 auto" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
+        <div style={{ marginBottom: 24 }}>
           <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(20px, 3vw, 26px)", fontWeight: 700 }}>Parcourir par secteur</h2>
-          <span style={{ color: "#a8d8b0", fontSize: 13, fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap", marginLeft: 12 }}>Voir tous →</span>
         </div>
         <div className="sectors-grid">
           {sectors.map((s) => (
@@ -365,26 +405,7 @@ export default function Home() {
                     })}
                   </div>
                 ))}
-                {compareTab === "fonctions" && [
-                  { label: "Paiement intégré", key: "paiement_integre" },
-                  { label: "Caisse certifiée", key: "caisse_certifiee" },
-                  { label: "Bornes billetterie", key: "bornes_billet" },
-                  { label: "Cashless", key: "cashless" },
-                  { label: "Vente sur place", key: "vente_sur_place" },
-                  { label: "Vente en ligne", key: "vente_en_ligne" },
-                  { label: "Bornes F&B", key: "bornes_fb" },
-                  { label: "Contrôle accès", key: "controle_acces" },
-                  { label: "Tarif dynamique", key: "tarification_dynamique" },
-                  { label: "Groupes", key: "gestion_groupes" },
-                  { label: "CSE", key: "gestion_cse" },
-                  { label: "CRM intégré", key: "crm_integre" },
-                  { label: "API ouverte", key: "api_ouverte" },
-                  { label: "Plan de salle", key: "plan_de_salle" },
-                  { label: "Multidevise", key: "multidevise" },
-                  { label: "Pass Culture", key: "pass_culture" },
-                  { label: "Chorus Pro", key: "chorus_pro_integre" },
-                  { label: "OTAs", key: "otas" },
-                ].map((row, i) => (
+                {compareTab === "fonctions" && FEATURES.map((row, i) => (
                   <div key={row.key} style={{ display: "grid", gridTemplateColumns: `140px repeat(${compareSolutions.length}, 1fr)`, background: i % 2 === 0 ? "#fafaf8" : "#fff", borderRadius: 6, padding: "10px 0" }}>
                     <div style={{ fontSize: 12, color: "#888", padding: "0 8px", display: "flex", alignItems: "center" }}>{row.label}</div>
                     {compareSolutions.map((s) => {
@@ -405,3 +426,4 @@ export default function Home() {
     </div>
   );
 }
+

@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { DIAGNOSTIC_URL } from "../lib/links";
 
 export default function Header() {
   const router = useRouter();
@@ -17,7 +18,7 @@ export default function Header() {
       <style>{`
         .header-back { font-size: 12px; color: #aaa; text-decoration: none; display: flex; align-items: center; gap: 4px; }
         .header-logo { font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-weight: 700; cursor: pointer; }
-        .header-demo { background: #a8d8b0; color: #fff; border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+        .header-demo { background: #141413; color: #fff; border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 700; text-decoration: none; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; }
         @media (max-width: 480px) {
           .header-back { display: none; }
           .header-demo { padding: 7px 12px; font-size: 12px; }
@@ -32,9 +33,11 @@ export default function Header() {
           Ticket<span style={{ color: "#a8d8b0" }}>Match</span>
         </span>
       </div>
-      <a href="https://tally.so/r/0Qolz6" target="_blank" rel="noopener noreferrer" className="header-demo">
-        Demander une demo
+      {/* Seul chemin proposé vers les opérateurs : le diagnostic, jamais un contact direct */}
+      <a href={DIAGNOSTIC_URL} className="header-demo">
+        ✦ Agent TicketMatch
       </a>
     </nav>
   );
 }
+
